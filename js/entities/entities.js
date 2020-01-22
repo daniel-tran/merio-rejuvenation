@@ -26,6 +26,12 @@ game.PlayerEntity = me.Entity.extend({
         
         // Max walking speed
         this.body.setMaxVelocity(4, 20);
+        
+        // When on a moving platform, we want to be able to move around on it.
+        // Use this value to make Merio slightly faster so he can move with the motion of the platform,
+        // while also promoting a slight speed boost when running against it
+        this.body.extendedMaxVelX = this.body.maxVel.x * 1.25;
+        
         // Max jumping speed
         this.body.setFriction(0.5, 0);
         
@@ -55,9 +61,14 @@ game.PlayerEntity = me.Entity.extend({
      * update the entity
      */
     update : function (dt) {
+        this.body.maxVel.x = 4;
         if (me.input.isKeyPressed("left")) {
             // Flip the sprite on X axis
             this.renderable.flipX(true);
+            // Apply moving platform speed boost
+            if (this.body.ridingplatform) {
+                this.body.maxVel.x = this.body.extendedMaxVelX;
+            }
             // Move the player by inverting their X axis force
             this.body.force.x = -this.body.maxVel.x;
             // Adjust the collision box so that you can cling onto edges
@@ -65,7 +76,7 @@ game.PlayerEntity = me.Entity.extend({
             this.body.getShape(1).points[1].x = this.width;
             this.body.getShape(1).points[2].x = getLeftScaledValue(this.width);
             this.body.getShape(1).points[3].x = getLeftScaledValue(this.width);
-            this.body.ridingplatform = false;
+            //this.body.ridingplatform = false;
             
             // Set the actual walking animation
             if (!this.renderable.isCurrentAnimation("walk")) {
@@ -74,6 +85,10 @@ game.PlayerEntity = me.Entity.extend({
         } else if (me.input.isKeyPressed("right")) {
              // Since the default direction is right, remove X axis flip changes
             this.renderable.flipX(false);
+            // Apply moving platform speed boost
+            if (this.body.ridingplatform) {
+                this.body.maxVel.x = this.body.extendedMaxVelX;
+            }
             // Move the player by using their X axis force
             this.body.force.x = this.body.maxVel.x;
             // Adjust the collision box so that you can cling onto edges
