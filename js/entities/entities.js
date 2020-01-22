@@ -39,11 +39,14 @@ game.PlayerEntity = me.Entity.extend({
         this.alwaysUpdate = true;
         
         // Indicate the walking animation
-        this.renderable.addAnimation("walk", [0, 1, 2, 3, 4, 7])
+        this.renderable.addAnimation("walk", [0])
         
         // Indicate which sprite is for idling
         this.renderable.addAnimation("stand", [0]);
         
+        // Indicate which sprite is for jumping
+        this.renderable.addAnimation("jump", [1]);
+
         // Default animation
         this.renderable.setCurrentAnimation("stand");
     },
@@ -105,6 +108,11 @@ game.PlayerEntity = me.Entity.extend({
                 this.body.jumping = true;
                 this.body.ridingplatform = false;
             }
+        }
+
+        // Use the jump animation while airborne
+        if (this.body.jumping || this.body.falling){
+            this.renderable.setCurrentAnimation("jump");
         }
 
         // apply physics to the body (this moves the entity)

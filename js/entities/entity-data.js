@@ -14,5 +14,5 @@ function getLeftScaledValue(val) {
 
 // Used to determine how tall Merio's hair collision box should be, in pixels.
 function getHairHeight() {
-    return 10;
+    return 20;
 }

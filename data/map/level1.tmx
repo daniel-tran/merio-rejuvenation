@@ -16,10 +16,9 @@
   </object>
  </objectgroup>
  <objectgroup id="2" name="Player">
-  <object id="8" name="mainPlayer" x="513.436" y="60.0165" width="62.75" height="64">
+  <object id="8" name="mainPlayer" x="513.436" y="60.0165" width="48" height="48">
    <properties>
-    <property name="framewidth" type="int" value="64"/>
-    <property name="image" value="gripe_run_right"/>
+    <property name="image" value="MERIO"/>
    </properties>
   </object>
  </objectgroup>
