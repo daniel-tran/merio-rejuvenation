@@ -159,6 +159,8 @@ game.PlayerEntity = me.Entity.extend({
                         (response.overlapV.y > 0) && (~~this.body.vel.y >= ~~response.overlapV.y)) {
                             // Disable X axis collision to allow for the player to pass through
                             response.overlapV.x = 0;
+                            // Try not to use the jump animation while on ground
+                            this.renderable.setCurrentAnimation("stand");
                             // Still consider the platform to be solid
                             return true;
                         }
@@ -191,6 +193,8 @@ game.PlayerEntity = me.Entity.extend({
                 } else {
                     // Player got hurt by colliding with the enemy
                     this.renderable.flicker(750);
+                    // Restart the level
+                    me.levelDirector.reloadLevel();
                 }
                 // Player is free to pass through in any case
                 return true;
@@ -292,7 +296,9 @@ game.PlayerEntity = me.Entity.extend({
          // Check and update movement
          this.body.update(dt);
          // Check against collisions
-         me.collision.check(this);
+         if (this.alive) {
+            me.collision.check(this);
+         }
          
          // Evaluates to true if the enemy moved or the update function was called
          return (this._super(me.Sprite, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
