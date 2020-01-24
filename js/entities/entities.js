@@ -184,6 +184,12 @@ game.PlayerEntity = me.Entity.extend({
                 // Player is free to pass through in any case
                 return true;
             case me.collision.types.ENEMY_OBJECT:
+                // If the enemy cannot be defeated, Merio will always lose to them.
+                if (other.undefeatable) {
+                    // Restart the level
+                    me.levelDirector.reloadLevel();
+                    return true;
+                }
                 // Action for when the player jumps on a known enemy object
                 if ((response.overlapV.y > 0) && !this.body.jumping) {
                     // Force a mini jump when they have been defeated
@@ -243,7 +249,7 @@ game.PlayerEntity = me.Entity.extend({
          let width = settings.width;
          
          // Define the sprite here instead of in the tilemap
-         settings.image = "wheelie_right";
+         settings.image = "MONSTOID";
          
          // Create the object at the right size
          settings.framewidth = 64;
@@ -259,11 +265,13 @@ game.PlayerEntity = me.Entity.extend({
          // Add a collision shape
          this.body.addShape(new me.Rect(0, 0, this.width, this.height));
          // Set max speed
-         this.body.setMaxVelocity(5, 7);
+         this.body.setMaxVelocity(2, 0);
          // Set friction
          this.body.setFriction(0.5, 0);
          // Enable physic collisions
          this.isKinematic = false;
+         // Update the player when outside the viewport
+         this.alwaysUpdate = true;
          
          // Positioning
          x = this.pos.x;
@@ -313,6 +321,132 @@ game.PlayerEntity = me.Entity.extend({
          }
          // All other objects are solid
          return true;
+     }
+ });
+ 
+ /**
+ * Orange monstoid entity
+ */
+ game.MonstoidEntity = me.Sprite.extend({
+     init: function(x, y, settings) {
+         // Get the area size that was defined in the tilemap
+         let width = settings.width;
+         
+         // Define the sprite here instead of in the tilemap
+         settings.image = "MONSTOID";
+         
+         // Create the object at the right size
+         settings.framewidth = 64;
+         settings.frameheight = 64;
+         settings.width = settings.framewidth;
+         settings.height = settings.frameheight;
+         
+         // Call parent constructor to apply the custom changes
+         this._super(me.Sprite, 'init', [x, y, settings]);
+         
+         // Add a new physic body
+         this.body = new me.Body(this);
+         // Add a collision shape
+         this.body.addShape(new me.Rect(0, 0, this.width, this.height));
+         // Set max speed
+         this.body.setMaxVelocity(2, 0);
+         // Set friction
+         this.body.setFriction(0.5, 0);
+         // Enable physic collisions
+         this.isKinematic = false;
+         // Update the player when outside the viewport
+         this.alwaysUpdate = true;
+         
+         // Positioning
+         x = this.pos.x;
+         this.startX = x;
+         this.pos.x = x + width - this.width;
+         this.endX = this.pos.x;
+         
+         // Indicate default walking direction
+         this.walkLeft = false;
+         
+         // Indicate whether this enemy cannot be defeated
+         this.undefeatable = true;
+     },
+     update: function(dt) {
+         // Enemy moves side to side
+         if (this.walkLeft && this.pos.x <= this.startX) {
+             this.walkLeft = false;
+             this.body.force.x = this.body.maxVel.x;
+         } else if (!this.walkLeft && this.pos.x >= this.endX) {
+             this.walkLeft = true;
+             this.body.force.x = -this.body.maxVel.x;
+         }
+         
+         // Check and update movement
+         this.body.update(dt);
+         
+         // Evaluates to true if the enemy moved or the update function was called
+         return (this._super(me.Sprite, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
+     }
+ });
+ 
+ /**
+ * Grey dust guy entity
+ */
+ game.DustGuyEntity = me.Sprite.extend({
+     init: function(x, y, settings) {
+         // Get the area size that was defined in the tilemap
+         let height = settings.height;
+         
+         // Define the sprite here instead of in the tilemap
+         settings.image = "DUSTGUY";
+         
+         // Create the object at the right size
+         settings.framewidth = 64;
+         settings.frameheight = 64;
+         settings.width = settings.framewidth;
+         settings.height = settings.frameheight;
+         
+         // Call parent constructor to apply the custom changes
+         this._super(me.Sprite, 'init', [x, y, settings]);
+         
+         // Add a new physic body
+         this.body = new me.Body(this);
+         // Add a collision shape
+         this.body.addShape(new me.Rect(0, 0, this.width, this.height));
+         // Set max speed
+         this.body.setMaxVelocity(0, 2);
+         // Set friction
+         this.body.setFriction(0.5, 0);
+         // Enable physic collisions
+         this.isKinematic = false;
+         // Update the player when outside the viewport
+         this.alwaysUpdate = true;
+         
+          // Positioning
+         y = this.pos.y;
+         this.startY = y;
+         this.pos.y = y + height - this.height;
+         this.endY = this.pos.y;
+         
+         // Indicate default walking direction
+         this.walkUp = false;
+         
+         // Indicate whether this enemy cannot be defeated
+         this.undefeatable = true;
+     },
+     update: function(dt) {
+         // Enemy moves side to side
+         if (this.walkUp && this.pos.y <= this.startY) {
+             this.walkUp = false;
+             this.body.force.y = this.body.maxVel.y;
+         } else if (!this.walkUp && this.pos.y >= this.endY) {
+             this.walkUp = true;
+             this.body.force.y = -this.body.maxVel.y;
+         }
+         
+         // Check and update movement
+         this.body.update(dt);
+         
+         // Evaluates to true if the enemy moved or the update function was called
+         return (this._super(me.Sprite, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
      }
  });
  

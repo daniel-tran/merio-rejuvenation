@@ -39,6 +39,8 @@ var game = {
         // Individually register other objects such as collectibles and enemies
         me.pool.register("CoinEntity", game.CoinEntity);
         me.pool.register("EnemyEntity", game.EnemyEntity);
+        me.pool.register("MonstoidEntity", game.MonstoidEntity);
+        me.pool.register("DustGuyEntity", game.DustGuyEntity);
         me.pool.register("MovingPlatformXEntity", game.MovingPlatformXEntity);
         me.pool.register("MovingPlatformYEntity", game.MovingPlatformYEntity);
         me.pool.register("GravityEntity", game.GravityEntity);
