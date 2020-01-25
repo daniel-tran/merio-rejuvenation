@@ -159,8 +159,6 @@ game.PlayerEntity = me.Entity.extend({
                         (response.overlapV.y > 0) && (~~this.body.vel.y >= ~~response.overlapV.y)) {
                             // Disable X axis collision to allow for the player to pass through
                             response.overlapV.x = 0;
-                            // Try not to use the jump animation while on ground
-                            this.renderable.setCurrentAnimation("stand");
                             // Still consider the platform to be solid
                             return true;
                         }
@@ -447,6 +445,56 @@ game.PlayerEntity = me.Entity.extend({
          
          // Evaluates to true if the enemy moved or the update function was called
          return (this._super(me.Sprite, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
+     }
+ });
+ 
+ /**
+ * Red box entity
+ */
+ game.BoxGuyEntity = me.Entity.extend({
+     init: function(x, y, settings) {
+         // Define the sprite here instead of in the tilemap
+         settings.image = "BOXGUY";
+
+         // Call parent constructor to apply the custom changes
+         this._super(me.Entity, 'init', [x, y, settings]);
+         // Inherit any custom properties defined in the tile map
+         // Note that this can only be done when extending the Entity object
+         this.settings = settings;
+
+         // Add a new physic body
+         this.body = new me.Body(this);
+         // Add a collision shape
+         this.body.addShape(new me.Rect(0, 0, this.width, this.height));
+         // Set friction
+         this.body.setFriction(0.5, 0);
+         // Register the object as standard block
+         this.body.collisionType = me.collision.types.WORLD_SHAPE;
+
+         // Enable physic collisions
+         this.isKinematic = false;
+
+         // Default message index if not defined in the tile map
+         if (!this.settings.messageIndex) {
+             this.settings.messageIndex = 0;
+         }
+
+         // List of all possible messages the box guy can say.
+         // Select a set of responses by defining the messageIndex custom property on a BoxGuyEntity in the tilemap.
+         this.messages = [
+            ["ARG?"],
+            ["WHOOP, WE FOUND IT", "HOW ABOUT YOU"],
+         ];
+     },
+     onCollision: function (response, other) {
+         // Only react when the player jumps from below and hits the box guy
+         if ((response.overlapV.y < 0) && other.body.vel.y < 0){
+            // Print out specific messages from the list of possible messages
+            for (let i = 0; i < this.messages[this.settings.messageIndex].length; i++) {
+                console.log(this.messages[this.settings.messageIndex][i]);
+            }
+         }
+         return false;
      }
  });
  
