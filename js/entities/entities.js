@@ -473,6 +473,9 @@ game.PlayerEntity = me.Entity.extend({
 
          // Enable physic collisions
          this.isKinematic = false;
+         
+         // Allow this entity to continue updates when the game is paused
+         this.updateWhenPaused = true;
 
          // Default message index if not defined in the tile map
          if (!this.settings.messageIndex) {
@@ -485,18 +488,55 @@ game.PlayerEntity = me.Entity.extend({
             ["ARG?"],
             ["WHOOP, WE FOUND IT", "HOW ABOUT YOU"],
          ];
+         this.messageLength = this.messages[this.settings.messageIndex].length;
+         // Use a subindex to detect which message in the individual sets to display
+         this.messageSubIndex = -1;
+         
+         // A custom function that can be called to read the next message, triggered by
+         // either a key press in entities.js or using an external call to this function in entity-data.js.
+         this.nextMessage = function(){
+            // Relying on the update function to be called on an interval basis to display the next message text
+            this.messageSubIndex++;
+            
+            // Once all the messages have been read, resume the game and hide the dialog box
+            if (this.messageSubIndex >= this.messageLength) {
+                this.messageSubIndex = -1;
+                toggleMessage("", false);
+                me.state.resume();
+                // Allow the game to be resumed when the windows gains focus again
+                me.sys.resumeOnFocus = true;
+            }
+         };
      },
      onCollision: function (response, other) {
          // Only react when the player jumps from below and hits the box guy
          if ((response.overlapV.y < 0) && other.body.vel.y < 0){
             // Print out specific messages from the list of possible messages
-            for (let i = 0; i < this.messages[this.settings.messageIndex].length; i++) {
-                console.log(this.messages[this.settings.messageIndex][i]);
-            }
+            this.messageSubIndex = 0;
          }
          return false;
+     },
+     update: function(dt) {
+         // Perform message display actions when it needs to be displayed
+         if (this.messageSubIndex >= 0 && this.messageSubIndex < this.messageLength) {
+             // Pause the game to provide time to read the messages
+             me.state.pause();
+             // Since the game is paused, disable the system behaviour of resuming when focussing on the game again.
+             me.sys.resumeOnFocus = false;
+             // Show the message using the dialog box defined in index.html
+             toggleMessage(this.messages[this.settings.messageIndex][this.messageSubIndex], true);
+             
+             // Read the next message using the spacebar
+             if (me.input.isKeyPressed("space")) {
+                this.nextMessage();
+            }
+         }
+         
+         // Evaluates to true if the enemy moved or the update function was called
+         return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
      }
  });
+ 
  
  /**
  * X Axis Moving platform entity
