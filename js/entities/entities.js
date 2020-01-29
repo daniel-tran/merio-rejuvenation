@@ -448,6 +448,80 @@ game.PlayerEntity = me.Entity.extend({
      }
  });
  
+  /**
+ * Cowface entity
+ */
+ game.CowfaceEntity = me.Entity.extend({
+     init: function(x, y, settings) {
+         
+         // Define the sprite here instead of in the tilemap
+         settings.image = "COWFACE";
+                  
+         // Call parent constructor to apply the custom changes
+         this._super(me.Entity, 'init', [x, y, settings]);
+         
+         // Inherit any custom properties defined in the tile map
+         // Note that this can only be done when extending the Entity object
+         this.settings = settings;
+         
+         // Add a new physic body
+         this.body = new me.Body(this);
+         // Add a collision shape
+         this.body.addShape(new me.Rect(0, 0, this.width, this.height));
+         // Set max speed
+         this.body.setMaxVelocity(0, 0);
+         // Set friction
+         this.body.setFriction(0.5, 0);
+         // Enable physic collisions
+         this.isKinematic = false;
+         // Update the player when outside the viewport
+         this.alwaysUpdate = true;
+         
+         // Indicate which sprite is for idling
+        this.renderable.addAnimation("active", [0]);
+        
+        // Indicate which sprite is for jumping
+        this.renderable.addAnimation("inactive", [1]);
+
+        // Default animation
+        this.renderable.setCurrentAnimation("active");
+         
+        // Indicate whether this enemy cannot be defeated
+        this.undefeatable = true;
+        
+        // Reference to the main player, since this enemy's behaviour depends on the player's actions
+        this.merio = undefined;
+        
+        // this.settings.active is a variable defined for the this enemy in the tile map.
+        // When undefined, Cowface will always be asleep.
+        // When defined, Cowface will use that state when Merio is airborne.
+     },
+     update: function(dt) {
+         // A reference to the main player can only be done once all the entities on the level have loaded.
+         // This only needs to be done once per instance of Cowface, to save computational resources.
+         if (this.merio === undefined) {
+             this.merio = me.game.world.getChildByName("mainPlayer")[0];
+         }
+         
+         // Toggle the state of Cowface when a certain condition is met.
+         // Compare that condition with the this.settings.active since not all Cowface instances should behave the same.
+         if ((this.merio.body.jumping || this.merio.body.falling) === this.settings.active) {
+             this.renderable.setCurrentAnimation("active");
+             this.body.collisionType = me.collision.types.ENEMY_OBJECT;
+         } else {
+             this.renderable.setCurrentAnimation("inactive");
+             // Change the collision type so it becomes safe to pass through Cowface
+             this.body.collisionType = me.collision.types.ACTION;
+         }
+         
+         // Check and update movement
+         this.body.update(dt);
+         
+         // Evaluates to true if the enemy moved or the update function was called
+         return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
+     }
+ });
+ 
  /**
  * Red box entity
  */

@@ -42,6 +42,7 @@ var game = {
         me.pool.register("MonstoidEntity", game.MonstoidEntity);
         me.pool.register("DustGuyEntity", game.DustGuyEntity);
         me.pool.register("BoxGuyEntity", game.BoxGuyEntity);
+        me.pool.register("CowfaceEntity", game.CowfaceEntity);
         me.pool.register("MovingPlatformXEntity", game.MovingPlatformXEntity);
         me.pool.register("MovingPlatformYEntity", game.MovingPlatformYEntity);
         me.pool.register("GravityEntity", game.GravityEntity);
