@@ -23,12 +23,7 @@
   </object>
  </objectgroup>
  <objectgroup id="4" name="Coin">
-  <object id="26" name="CoinEntity" x="64" y="448" width="32" height="32">
-   <properties>
-    <property name="framewidth" type="int" value="32"/>
-    <property name="image" value="spinning_coin_gold"/>
-   </properties>
-  </object>
+  <object id="26" name="CoinEntity" x="64" y="448" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="8" name="GravityZone">
   <object id="47" name="GravityEntity" x="640" y="192" width="352" height="160"/>

@@ -6,8 +6,11 @@ game.PlayScreen = me.ScreenObject.extend({
         // Initial level to load
         me.levelDirector.loadLevel("level1");
         
-        // reset the score
-        game.data.score = 0;
+        // reset the score and life count when starting a new game
+        if (game.data.lives <= 0) {
+            game.data.lives = game.data.initialLives;
+            game.data.score = game.data.initialScore;
+        }
         
         // Play an overworld theme song
         me.audio.playTrack("forest_theme");

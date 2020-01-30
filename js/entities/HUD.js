@@ -42,7 +42,7 @@ game.HUD.ScoreItem = me.Renderable.extend({
         // Assign the font
         this.font = new me.BitmapText(0, 0, {font: "PressStart2P"});
         this.font.textAlign = "right";
-        this.font.textBasaeline = "top";
+        this.font.textBaseline = "top";
 
         // local copy of the global score
         this.score = -1;
@@ -66,7 +66,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
      */
     draw : function (context) {
         // pos variables are relative to the viewport origin
-        this.font.draw(context, game.data.score, me.game.viewport.width * 0.90 + this.pos.x, me.game.viewport.height * 0.10 + this.pos.y);
+        this.font.draw(context, `Score: ${game.data.score}`, me.game.viewport.width * 0.90 + this.pos.x, me.game.viewport.height * 0.10 + this.pos.y);
+        this.font.draw(context, `Lifes: ${game.data.lives}`, me.game.viewport.width * 0.90 + this.pos.x, me.game.viewport.height * 0.25 + this.pos.y);
     }
 
 });

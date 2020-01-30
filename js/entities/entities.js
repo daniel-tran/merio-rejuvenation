@@ -55,12 +55,44 @@ game.PlayerEntity = me.Entity.extend({
 
         // Default animation
         this.renderable.setCurrentAnimation("stand");
+        
+        // Indicates if Merio has lost a life
+        this.alive = true;
     },
 
     /**
      * update the entity
      */
     update : function (dt) {
+        
+        // Actions for when if Merio has died. This cannot be done in the onCollision callback,
+        // as Merio actually collides with enemies multiple times, triggering these more than once per life.
+        if (!this.alive) {
+            // Reduce the life count
+            game.data.lives--;
+            if (game.data.lives <= 0) {
+                // GAME IS OVER
+                // Keep lives at 0, so that it doesn't spike into the negative values
+                game.data.lives = 0;
+                // Go to a screen where it's more obvious that a GAME OVER has occurred.
+                // Since the update callback is called multiple times at this point,
+                // we accidentally have a "lightning flash" transition effect.
+                me.state.change(me.state.MENU);
+            } else {
+                // Player still has lives remaining
+                me.levelDirector.reloadLevel();
+                // To get the flash animation played, me.state needs to change to a new value.
+                // In game.js, two states are linked to the same GameScreen. So as long as the state
+                // is toggled between those two states, the transition effect will always play.
+                if (me.state.isCurrent(me.state.GAME_END)) {
+                    me.state.change(me.state.PLAY);
+                } else {
+                    me.state.change(me.state.GAME_END);
+                }
+            }
+            return false;
+        }
+        
         this.body.maxVel.x = 4;
         if (me.input.isKeyPressed("left")) {
             // Flip the sprite on X axis
@@ -135,7 +167,7 @@ game.PlayerEntity = me.Entity.extend({
 
         // handle collisions against other shapes
         me.collision.check(this);
-
+        
         // return true if we moved or if the renderable was updated
         return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
     },
@@ -184,8 +216,7 @@ game.PlayerEntity = me.Entity.extend({
             case me.collision.types.ENEMY_OBJECT:
                 // If the enemy cannot be defeated, Merio will always lose to them.
                 if (other.undefeatable) {
-                    // Restart the level
-                    me.levelDirector.reloadLevel();
+                    this.alive = false;
                     return true;
                 }
                 // Action for when the player jumps on a known enemy object
@@ -196,9 +227,8 @@ game.PlayerEntity = me.Entity.extend({
                     this.body.jumping = true;*/
                 } else {
                     // Player got hurt by colliding with the enemy
-                    this.renderable.flicker(750);
-                    // Restart the level
-                    me.levelDirector.reloadLevel();
+                    //this.renderable.flicker(750);
+                    this.alive = false;
                 }
                 // Player is free to pass through in any case
                 return true;
@@ -219,13 +249,14 @@ game.PlayerEntity = me.Entity.extend({
  game.CoinEntity = me.CollectableEntity.extend({
      // Base initialisation
      init: function (x, y, settings) {
+         settings.image = "SECRET";
          this._super(me.CollectableEntity, 'init', [x, y, settings]);
      },
      
      // Collision event
      onCollision: function (response, other) {
          // Add various events to occur when this is collected
-         game.data.score += 5000;
+         game.data.score += 1000000;
          
          // Once collected, it should only register once
          this.body.setCollisionMask(me.collision.types.NO_OBJECT);

@@ -4,8 +4,13 @@ var game = {
 
     // an object where to store game information
     data : {
-        // score
-        score : 0
+        // initial values, referenced when the game needs to be reset.
+        // Note that these are not made immutable, even though they are not to be modified.
+        initialScore: 0,
+        initialLives: 3,
+        // score and lives. These are set in play.js when it realises a new game is starting
+        score : 0,
+        lives : 0
     },
 
 
@@ -28,7 +33,10 @@ var game = {
     // Run on game resources loaded.
     "loaded" : function () {
         me.state.set(me.state.MENU, new game.TitleScreen());
-        me.state.set(me.state.PLAY, new game.PlayScreen());
+        // Set up the necessary states to get the flash animation playing when restarting the level
+        let screen = new game.PlayScreen();
+        me.state.set(me.state.PLAY, screen);
+        me.state.set(me.state.GAME_END, screen);
         
         // Global fading transition
         me.state.transition("fade", "#FFFFFF", 250);
