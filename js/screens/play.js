@@ -4,7 +4,10 @@ game.PlayScreen = me.ScreenObject.extend({
      */
     onResetEvent: function() {
         // Initial level to load
-        me.levelDirector.loadLevel("level1");
+        // Since levels can be restarted, the loaded level needs to vary 
+        // based on which tile set this callback is called in.
+        let currentLevel = me.levelDirector.getCurrentLevel().name;
+        me.levelDirector.loadLevel(currentLevel);
         
         // reset the score and life count when starting a new game
         if (game.data.lives <= 0) {
