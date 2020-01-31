@@ -17,6 +17,11 @@ function getHairHeight() {
     return 20;
 }
 
+// Used for inCollision callbacks for applying player-specific collision logic
+function detectMerio(entityName) {
+    return entityName === "mainPlayer";
+}
+
 // Shows/Hides the message modal from index.html and sets its main body of text
 function toggleMessage(message, isShown) {
     let textStatus = ["none", "block"];

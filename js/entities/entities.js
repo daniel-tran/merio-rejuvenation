@@ -153,13 +153,14 @@ game.PlayerEntity = me.Entity.extend({
                 // Push the player up with some initial acceleration
                 this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
                 this.body.jumping = true;
-                this.body.ridingplatform = false;
             }
         }
 
         // Use the jump animation while airborne
         if (this.body.jumping || this.body.falling){
             this.renderable.setCurrentAnimation("jump");
+            // When airborne, the player is physically not riding the platform
+            this.body.ridingplatform = false;
         }
 
         // apply physics to the body (this moves the entity)
@@ -201,8 +202,8 @@ game.PlayerEntity = me.Entity.extend({
             case me.collision.types.USER:
                 this.body.gravity.y = 0.98;
                 this.body.maxVel.y = 20;
-                // Allow the player to drop down from a platform with velocity considerations
-                if ((response.overlapV.y > 0)) {
+                // Only ride the platform when physically on top of it within a certain height range
+                if ((response.overlapV.y > 0) && (response.overlapV.y < this.body.height)) {
                     // Allow the player to ride on an enemy's motion
                     this.body.ridingplatform = true;
                     // Since true = 1 and false = 0, Merio's X axis motion can be toggled
@@ -255,14 +256,16 @@ game.PlayerEntity = me.Entity.extend({
      
      // Collision event
      onCollision: function (response, other) {
-         // Add various events to occur when this is collected
-         game.data.score += 1000000;
-         
-         // Once collected, it should only register once
-         this.body.setCollisionMask(me.collision.types.NO_OBJECT);
-         
-         // Garbage collection for a collected object
-         me.game.world.removeChild(this);
+         if (detectMerio(other.name)) {
+            // Add various events to occur when this is collected
+            game.data.score += 1000000;
+            
+            // Once collected, it should only register once
+            this.body.setCollisionMask(me.collision.types.NO_OBJECT);
+            
+            // Garbage collection for a collected object
+            me.game.world.removeChild(this);
+         }
          
          return false;
      }
@@ -615,9 +618,11 @@ game.PlayerEntity = me.Entity.extend({
      },
      onCollision: function (response, other) {
          // Only react when the player jumps from below and hits the box guy
-         if ((response.overlapV.y < 0) && other.body.vel.y < 0){
-            // Print out specific messages from the list of possible messages
-            this.messageSubIndex = 0;
+         if (detectMerio(other.name)) {
+            if ((response.overlapV.y < 0) && other.body.vel.y < 0){
+                // Print out specific messages from the list of possible messages
+                this.messageSubIndex = 0;
+            }
          }
          return false;
      },
@@ -776,8 +781,10 @@ game.PlayerEntity = me.Entity.extend({
      onCollision: function (response, other) {
          // When riding up, prevent the collision boxes from mashing which stops jumping
          // Check for overlap, so this is only applied when standing on top of the platform
-         if (this.walkUp && (response.overlapV.y  > 0)){
-            other.body.vel.y = -other.body.maxVel.y * 0.1 * me.timer.tick;
+         if (detectMerio(other.name)) {
+            if (this.walkUp && (response.overlapV.y  > 0)){
+                other.body.vel.y = -other.body.maxVel.y * 0.1 * me.timer.tick;
+            }
          }
          return false;
      }
@@ -794,11 +801,13 @@ game.PlayerEntity = me.Entity.extend({
      
      // Collision event
      onCollision: function (response, other) {
-         // Apply floaty motion
-         other.body.gravity.y = 0.1;
-         other.body.maxVel.y = 5;
-         // Just a visual reminder of floaty behaviour
-         other.renderable.setOpacity(0.5);
+         if (detectMerio(other.name)) {
+            // Apply floaty motion
+            other.body.gravity.y = 0.1;
+            other.body.maxVel.y = 5;
+            // Just a visual reminder of floaty behaviour
+            other.renderable.setOpacity(0.5);
+         }
          return false;
      }
  });

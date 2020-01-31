@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="57">
+<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="9" nextobjectid="58">
  <tileset firstgid="1" source="area01_level_tiles.tsx"/>
  <layer id="1" name="Tile Layer 1" width="200" height="20">
   <data encoding="base64">
@@ -128,5 +128,6 @@
     <property name="messageIndex" type="int" value="1"/>
    </properties>
   </object>
+  <object id="57" name="MovingPlatformXEntity" x="608" y="287" width="416" height="32"/>
  </objectgroup>
 </map>
