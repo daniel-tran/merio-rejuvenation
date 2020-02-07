@@ -16,8 +16,9 @@ var game = {
 
     // Run on page load.
     "onload" : function () {
-        // Initialize the video.
-        if (!me.video.init(640, 480, {wrapper : "screen", scale : "auto", scaleMethod: "flex-width"})) {
+        // Initialize the video. See https://melonjs.github.io/melonJS/docs/me.video.html#.init
+        // Use the fit scale method to scale the viewport in both dimensions when the browser window changes.
+        if (!me.video.init(640, 480, {wrapper : "screen", scale : "auto", scaleMethod: "fit"})) {
             alert("Your browser does not support HTML5 canvas.");
             return;
         }
@@ -54,6 +55,10 @@ var game = {
         me.pool.register("MovingPlatformXEntity", game.MovingPlatformXEntity);
         me.pool.register("MovingPlatformYEntity", game.MovingPlatformYEntity);
         me.pool.register("GravityEntity", game.GravityEntity);
+        me.pool.register("TrampolineEntity", game.TrampolineEntity);
+
+        // Register all custom GUI entities
+        me.pool.register("MessageButtonEntity", game.MessageButtonEntity);
         
         // Various key bindings for use in js\entities\entities.js
         me.input.bindKey(me.input.KEY.LEFT, "left");
@@ -63,6 +68,6 @@ var game = {
         me.input.bindKey(me.input.KEY.SPACE, "space", true);
 
         // Start the game. PLAY to play immediately, MENU to display other options
-        me.state.change(me.state.MENU);
+        me.state.change(me.state.PLAY);
     }
 };

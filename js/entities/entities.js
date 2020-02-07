@@ -226,13 +226,13 @@ game.PlayerEntity = me.Entity.extend({
                     /*this.body.falling = false;
                     this.body.vel.y = -this.body.maxVel.y * me.timer.tick;
                     this.body.jumping = true;*/
-                } else {
+                } else if (!detectMerio(other.name)) {
                     // Player got hurt by colliding with the enemy
                     //this.renderable.flicker(750);
                     this.alive = false;
                 }
                 // Player is free to pass through in any case
-                return true;
+                return false;
             default:
                 // Player is free to pass through in any case
                 return false;
@@ -609,10 +609,7 @@ game.PlayerEntity = me.Entity.extend({
             // Once all the messages have been read, resume the game and hide the dialog box
             if (this.messageSubIndex >= this.messageLength) {
                 this.messageSubIndex = -1;
-                toggleMessage("", false);
-                me.state.resume();
-                // Allow the game to be resumed when the windows gains focus again
-                me.sys.resumeOnFocus = true;
+                toggleResume(true, "");
             }
          };
      },
@@ -630,11 +627,8 @@ game.PlayerEntity = me.Entity.extend({
          // Perform message display actions when it needs to be displayed
          if (this.messageSubIndex >= 0 && this.messageSubIndex < this.messageLength) {
              // Pause the game to provide time to read the messages
-             me.state.pause();
-             // Since the game is paused, disable the system behaviour of resuming when focussing on the game again.
-             me.sys.resumeOnFocus = false;
              // Show the message using the dialog box defined in index.html
-             toggleMessage(this.messages[this.settings.messageIndex][this.messageSubIndex], true);
+             toggleResume(false, this.messages[this.settings.messageIndex][this.messageSubIndex]);
              
              // Read the next message using the spacebar
              if (me.input.isKeyPressed("space")) {
@@ -811,3 +805,25 @@ game.PlayerEntity = me.Entity.extend({
          return false;
      }
  });
+ 
+ /**
+ * Trampoline entity
+ */
+ game.TrampolineEntity = me.CollectableEntity.extend({
+     // Base initialisation
+     init: function (x, y, settings) {
+         settings.image = "TRAMPOLINE";
+         this._super(me.CollectableEntity, 'init', [x, y, settings]);
+     },
+     
+     // Collision event
+     onCollision: function (response, other) {
+         if (detectMerio(other.name)) {
+            other.body.falling = false;
+            other.body.vel.y = -other.body.maxVel.y * me.timer.tick;
+            other.body.jumping = true;
+         }
+         return false;
+     }
+ });
+ 
