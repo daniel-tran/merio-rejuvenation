@@ -56,7 +56,7 @@ game.MessageButtonEntity = me.GUI_Object.extend({
     onClick: function (event) {
         if (this.settings.redirect) {
             // Makes the game flash and then load the main game
-            me.state.change(me.state.GAME_END);
+            MakeshiftFlashAnimation();
             me.levelDirector.loadLevel(this.settings.redirect);
             return false;
         }

@@ -50,6 +50,22 @@ function toggleResume(isResuming, message) {
     }
 }
 
+// To get the flash animation played, me.state needs to change to a new value.
+// In game.js, two states are linked to the same GameScreen. So as long as the state
+// is toggled between those two states, the transition effect will always play.
+function MakeshiftFlashAnimation() {
+    if (me.state.isCurrent(me.state.GAME_END)) {
+        me.state.change(me.state.PLAY);
+    } else {
+        me.state.change(me.state.GAME_END);
+    }
+}
+
+// Checks to see if the current room is a level that is part of the actual game.
+function isGameLevel() {
+    return me.levelDirector.getCurrentLevel().name.startsWith("level");
+}
+
 // An external interface to call BoxGuyEntity.nextMessage() from entities.js
 function manualMessageUpdate() {
     // Note: me.game.world.getChildByName() is computationally expensive, so try not to do this all the time.

@@ -75,20 +75,12 @@ game.PlayerEntity = me.Entity.extend({
                 // Keep lives at 0, so that it doesn't spike into the negative values
                 game.data.lives = 0;
                 // Go to a screen where it's more obvious that a GAME OVER has occurred.
-                // Since the update callback is called multiple times at this point,
-                // we accidentally have a "lightning flash" transition effect.
-                me.state.change(me.state.MENU);
+                MakeshiftFlashAnimation();
+                me.levelDirector.loadLevel("gameover");
             } else {
                 // Player still has lives remaining
                 me.levelDirector.reloadLevel();
-                // To get the flash animation played, me.state needs to change to a new value.
-                // In game.js, two states are linked to the same GameScreen. So as long as the state
-                // is toggled between those two states, the transition effect will always play.
-                if (me.state.isCurrent(me.state.GAME_END)) {
-                    me.state.change(me.state.PLAY);
-                } else {
-                    me.state.change(me.state.GAME_END);
-                }
+                MakeshiftFlashAnimation();
             }
             return false;
         }

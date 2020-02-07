@@ -65,8 +65,7 @@ game.HUD.ScoreItem = me.Renderable.extend({
      * draw the score
      */
     draw : function (context) {
-        let currentLevel = me.levelDirector.getCurrentLevel().name;
-        if (currentLevel !== "_startmenu") {
+        if (isGameLevel()) {
             // pos variables are relative to the viewport origin
             this.font.draw(context, `Score: ${game.data.score}`, me.game.viewport.width * 0.90 + this.pos.x, me.game.viewport.height * 0.10 + this.pos.y);
             this.font.draw(context, `Lifes: ${game.data.lives}`, me.game.viewport.width * 0.90 + this.pos.x, me.game.viewport.height * 0.25 + this.pos.y);
