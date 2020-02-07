@@ -103,7 +103,7 @@ game.PlayerEntity = me.Entity.extend({
             //this.body.ridingplatform = false;
             
             // Set the actual walking animation only when the player is physically grounded
-            if (this.body.vel.y === 0) {
+            if (this.body.vel.y === 0 || this.body.ridingplatform) {
                 this.renderable.setCurrentAnimation("walk");
             }
         } else if (me.input.isKeyPressed("right")) {
@@ -123,7 +123,7 @@ game.PlayerEntity = me.Entity.extend({
             this.body.ridingplatform = false;
             
             // Set the actual walking animation only when the player is physically grounded
-            if (this.body.vel.y === 0) {
+            if (this.body.vel.y === 0 || this.body.ridingplatform) {
                 this.renderable.setCurrentAnimation("walk");
             }
         } else {
@@ -132,8 +132,10 @@ game.PlayerEntity = me.Entity.extend({
                 // When not on a moving platform, no motion is active.
                 this.body.force.x = 0;
             }
-            // Use the standing animation
-            this.renderable.setCurrentAnimation("stand");
+            // Use the standing animation when the player is physically grounded
+            if (this.body.vel.y === 0 || this.body.ridingplatform) {
+                this.renderable.setCurrentAnimation("stand");
+            }
         }
         
         if (me.input.isKeyPressed("jump")) {
@@ -177,35 +179,40 @@ game.PlayerEntity = me.Entity.extend({
         // Different reactions for colliding with different object types
         switch (response.b.body.collisionType) {
             case me.collision.types.WORLD_SHAPE:
-                this.body.ridingplatform = false;
+                if (!other.name.startsWith("MovingPlatform")){
+                    // The block is just a static piece of the environment
+                    this.body.ridingplatform = false;
+                } else {
+                    // Player is currently in contact with a moving platform.
+                    // Only ride the platform when physically on top of it within a certain height range
+                    if ((response.overlapV.y > 0) && (response.overlapV.y < this.body.height)) {
+                        // Allow the player to ride on an enemy's motion
+                        this.body.ridingplatform = true;
+                        // Since true = 1 and false = 0, Merio's X axis motion can be toggled
+                        // based on the current X velocity of the platform itself.
+                        // As such, the direction can be 1 - 0 (right) or 0 - 1 (left).
+                        let direction = ((response.b.body.vel.x > 0) - (response.b.body.vel.x < 0));
+                        this.body.force.x = this.body.maxVel.x * direction;
+                        // Use the idling animation when not moving around on the platform
+                        if (!this.renderable.isCurrentAnimation("walk")) {
+                            this.renderable.setCurrentAnimation("stand");
+                        }
+                    }else{
+                        this.body.ridingplatform = false;
+                    }
+                }
                 if (other.type === "platform") {
                     // Allow the player to drop down from a platform with velocity considerations
-                    if (this.body.falling && !me.input.isKeyPressed("down") && 
-                        (response.overlapV.y > 0) && (~~this.body.vel.y >= ~~response.overlapV.y)) {
-                            // Disable X axis collision to allow for the player to pass through
-                            response.overlapV.x = 0;
-                            // Still consider the platform to be solid
-                            return true;
-                        }
+                    if (this.body.falling && (response.overlapV.y > 0) && (~~this.body.vel.y >= ~~response.overlapV.y)) {
+                        // Disable X axis collision to allow for the player to pass through
+                        response.overlapV.x = 0;
+                        // Still consider the platform to be solid
+                        return true;
+                    }
                     // Player is free to pass through in any case
                     return false;
                 }
                 break;
-            case me.collision.types.USER:
-                this.body.gravity.y = 0.98;
-                this.body.maxVel.y = 20;
-                // Only ride the platform when physically on top of it within a certain height range
-                if ((response.overlapV.y > 0) && (response.overlapV.y < this.body.height)) {
-                    // Allow the player to ride on an enemy's motion
-                    this.body.ridingplatform = true;
-                    // Since true = 1 and false = 0, Merio's X axis motion can be toggled
-                    // based on the current X velocity of the platform itself.
-                    // As such, the direction can be 1 - 0 (right) or 0 - 1 (left).
-                    let direction = ((response.b.body.vel.x > 0) - (response.b.body.vel.x < 0));
-                    this.body.force.x = this.body.maxVel.x * direction;
-                }else{this.body.ridingplatform = false;}
-                // Player is free to pass through in any case
-                return true;
             case me.collision.types.ENEMY_OBJECT:
                 // If the enemy cannot be defeated, Merio will always lose to them.
                 if (other.undefeatable) {
@@ -662,10 +669,8 @@ game.PlayerEntity = me.Entity.extend({
          this.body.setMaxVelocity(4, 0);
          // Set friction
          this.body.setFriction(0.5, 0);
-         // Register the object as not an ENEMY_OBJECT
-         // Omitting this line means you are applying enemy collision triggers
-         // Also, it seems USER is the only type that maintains the proprties of regular platforms
-         this.body.collisionType = me.collision.types.USER;
+         // Register the object as standard block
+         this.body.collisionType = me.collision.types.WORLD_SHAPE;
          
          // Update the player when outside the viewport
          this.alwaysUpdate = true;
@@ -728,10 +733,8 @@ game.PlayerEntity = me.Entity.extend({
          this.body.setMaxVelocity(0, 1);
          // Set friction
          this.body.setFriction(0.5, 0);
-         // Register the object as not an ENEMY_OBJECT
-         // Omitting this line means you are applying enemy collision triggers
-         // Also, it seems USER is the only type that maintains the proprties of regular platforms
-         this.body.collisionType = me.collision.types.USER;
+         // Register the object as standard block
+         this.body.collisionType = me.collision.types.WORLD_SHAPE;
          
          // Update the player when outside the viewport
          this.alwaysUpdate = true;
