@@ -233,6 +233,11 @@ game.PlayerEntity = me.Entity.extend({
                 // Player is free to pass through in any case
                 return false;
             default:
+                // Gravity zones cause strange behaviour when colliding with moving platforms.
+                // Manually ensure the falling state is registered correctly in such cases.
+                if (other.name === "GravityEntity" && this.body.vel.y < 0) {
+                    this.body.falling = true;
+                }
                 // Player is free to pass through in any case
                 return false;
         }
@@ -366,12 +371,6 @@ game.PlayerEntity = me.Entity.extend({
          // Define the sprite here instead of in the tilemap
          settings.image = "MONSTOID";
          
-         // Create the object at the right size
-         settings.framewidth = 64;
-         settings.frameheight = 64;
-         settings.width = settings.framewidth;
-         settings.height = settings.frameheight;
-         
          // Call parent constructor to apply the custom changes
          this._super(me.Sprite, 'init', [x, y, settings]);
          
@@ -381,8 +380,6 @@ game.PlayerEntity = me.Entity.extend({
          this.body.addShape(new me.Rect(0, 0, this.width, this.height));
          // Set max speed
          this.body.setMaxVelocity(2, 0);
-         // Set friction
-         this.body.setFriction(0.5, 0);
          // Enable physic collisions
          this.isKinematic = false;
          // Update the player when outside the viewport
@@ -429,12 +426,6 @@ game.PlayerEntity = me.Entity.extend({
          // Define the sprite here instead of in the tilemap
          settings.image = "DUSTGUY";
          
-         // Create the object at the right size
-         settings.framewidth = 64;
-         settings.frameheight = 64;
-         settings.width = settings.framewidth;
-         settings.height = settings.frameheight;
-         
          // Call parent constructor to apply the custom changes
          this._super(me.Sprite, 'init', [x, y, settings]);
          
@@ -444,8 +435,6 @@ game.PlayerEntity = me.Entity.extend({
          this.body.addShape(new me.Rect(0, 0, this.width, this.height));
          // Set max speed
          this.body.setMaxVelocity(0, 2);
-         // Set friction
-         this.body.setFriction(0.5, 0);
          // Enable physic collisions
          this.isKinematic = false;
          // Update the player when outside the viewport
@@ -503,8 +492,6 @@ game.PlayerEntity = me.Entity.extend({
          this.body.addShape(new me.Rect(0, 0, this.width, this.height));
          // Set max speed
          this.body.setMaxVelocity(0, 0);
-         // Set friction
-         this.body.setFriction(0.5, 0);
          // Enable physic collisions
          this.isKinematic = false;
          // Update the player when outside the viewport

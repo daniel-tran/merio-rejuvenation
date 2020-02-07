@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="area01_level_tiles.tsx"/>
  <tileset firstgid="141" source="all_tiles.tsx"/>
  <imagelayer id="9" name="Background">
-  <image source="../img/backdrop/backdrop_level1.png" width="512" height="256"/>
+  <image source="../img/backdrop/backdrop_level1.png" width="512" height="512"/>
   <properties>
    <property name="repeat" value="repeat-x"/>
   </properties>
@@ -36,8 +36,8 @@
   <object id="47" name="GravityEntity" x="640" y="192" width="352" height="160"/>
  </objectgroup>
  <objectgroup id="5" name="Enemy">
-  <object id="27" name="MonstoidEntity" x="576" y="448" width="224" height="64"/>
-  <object id="48" name="DustGuyEntity" x="1280" y="96" width="64" height="256"/>
+  <object id="27" name="MonstoidEntity" x="576" y="448" width="224" height="48"/>
+  <object id="48" name="DustGuyEntity" x="1280" y="96" width="48" height="256"/>
   <object id="55" name="CowfaceEntity" x="288" y="432" width="48" height="48">
    <properties>
     <property name="active" type="bool" value="false"/>
