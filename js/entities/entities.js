@@ -102,7 +102,7 @@ game.PlayerEntity = me.Entity.extend({
             this.body.getShape(1).points[3].x = getLeftScaledValue(this.width);
             //this.body.ridingplatform = false;
             
-            // Set the actual walking animation only when the player is phsyically grounded
+            // Set the actual walking animation only when the player is physically grounded
             if (this.body.vel.y === 0) {
                 this.renderable.setCurrentAnimation("walk");
             }
@@ -122,7 +122,7 @@ game.PlayerEntity = me.Entity.extend({
             this.body.getShape(1).points[3].x = 0;
             this.body.ridingplatform = false;
             
-            // Set the actual walking animation only when the player is phsyically grounded
+            // Set the actual walking animation only when the player is physically grounded
             if (this.body.vel.y === 0) {
                 this.renderable.setCurrentAnimation("walk");
             }
