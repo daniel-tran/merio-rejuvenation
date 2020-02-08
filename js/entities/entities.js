@@ -546,6 +546,65 @@ game.PlayerEntity = me.Entity.extend({
  });
  
  /**
+ * Snowman entity, with custom initialisation of various settings
+ */
+ game.SnowmanEntity = me.Entity.extend({
+     init: function(x, y, settings) {
+         // Define the sprite here instead of in the tilemap
+         settings.image = "SNOWMAN";
+         
+         // Call parent constructor to apply the custom changes
+         this._super(me.Entity, 'init', [x, y, settings]);
+         
+         // Add a new physic body
+         this.body = new me.Body(this);
+         // Add a collision shape
+         this.body.addShape(new me.Rect(0, 0, this.width, this.height));
+         // Set max speed
+         this.body.setMaxVelocity(0, 0);
+         // Set friction
+         this.body.setFriction(0.5, 0);
+         // Enable physic collisions
+         this.isKinematic = false;
+         // This enemy doesn't move, so it does not require updating when outside the viewport
+         this.alwaysUpdate = false;
+         
+         // Indicate whether this enemy cannot be defeated
+        this.undefeatable = false;
+         
+         // Indicate default state of the enemy
+         this.alive = true;
+     },
+     update: function(dt) {
+         if (!this.alive) {
+             game.data.score += 800;
+             me.game.world.removeChild(this);
+         }
+         
+         // Check and update movement
+         this.body.update(dt);
+         // Check against collisions
+         if (this.alive) {
+            me.collision.check(this);
+         }
+         
+         // Evaluates to true if the enemy moved or the update function was called
+         return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
+     },
+     onCollision: function(response, other) {
+         if (response.b.body.collisionType !== me.collision.types.WORLD_SHAPE) {
+             // Basically die if the enemy was jumped on
+             if (this.alive && (response.overlapV.y  > 0) && response.a.body.falling) {
+                 this.alive = false;
+             }
+             return false;
+         }
+         // All other objects are solid
+         return true;
+     }
+ });
+ 
+ /**
  * Red box entity
  */
  game.BoxGuyEntity = me.Entity.extend({
