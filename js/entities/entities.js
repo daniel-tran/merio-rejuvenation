@@ -25,12 +25,7 @@ game.PlayerEntity = me.Entity.extend({
         ]));
         
         // Max walking speed
-        this.body.setMaxVelocity(4, 20);
-        
-        // When on a moving platform, we want to be able to move around on it.
-        // Use this value to make Merio slightly faster so he can move with the motion of the platform,
-        // while also promoting a slight speed boost when running against it
-        this.body.extendedMaxVelX = this.body.maxVel.x * 1.25;
+        this.body.setMaxVelocity(getPlayerMaxSpeedX(), getPlayerMaxSpeedY());
         
         // Max jumping speed
         this.body.setFriction(0.5, 0);
@@ -85,13 +80,21 @@ game.PlayerEntity = me.Entity.extend({
             return false;
         }
         
-        this.body.maxVel.x = 4;
+        // Default speed settings when not riding on a platform,
+        // ensuring such motion changes aren't always applied.
+        if (!this.body.ridingplatform){
+            this.body.maxVel.x = getPlayerMaxSpeedX();
+        } else {
+            // Naively, this is also applied to vertical moving platforms.
+            this.body.maxVel.x = getMovingPlatformMaxSpeedX();
+        }
+
         if (me.input.isKeyPressed("left")) {
             // Flip the sprite on X axis
             this.renderable.flipX(true);
             // Apply moving platform speed boost
             if (this.body.ridingplatform) {
-                this.body.maxVel.x = this.body.extendedMaxVelX;
+                this.body.maxVel.x = getPlayerExtendedMaxSpeedX();
             }
             // Move the player by inverting their X axis force
             this.body.force.x = -this.body.maxVel.x;
@@ -111,7 +114,7 @@ game.PlayerEntity = me.Entity.extend({
             this.renderable.flipX(false);
             // Apply moving platform speed boost
             if (this.body.ridingplatform) {
-                this.body.maxVel.x = this.body.extendedMaxVelX;
+                this.body.maxVel.x = getPlayerExtendedMaxSpeedX();
             }
             // Move the player by using their X axis force
             this.body.force.x = this.body.maxVel.x;
@@ -173,8 +176,8 @@ game.PlayerEntity = me.Entity.extend({
      */
     onCollision : function (response, other) {
         // Reset from floaty behaviour
-        this.body.gravity.y = 0.98;
-        this.body.maxVel.y = 20;
+        this.body.gravity.y = getPlayerMaxGravityY();
+        this.body.maxVel.y = getPlayerMaxSpeedY();
         this.renderable.setOpacity(1);
         // Different reactions for colliding with different object types
         switch (response.b.body.collisionType) {
@@ -192,7 +195,7 @@ game.PlayerEntity = me.Entity.extend({
                         // based on the current X velocity of the platform itself.
                         // As such, the direction can be 1 - 0 (right) or 0 - 1 (left).
                         let direction = ((response.b.body.vel.x > 0) - (response.b.body.vel.x < 0));
-                        this.body.force.x = this.body.maxVel.x * direction;
+                        this.body.force.x = response.b.body.maxVel.x * direction;
                         // Use the idling animation when not moving around on the platform
                         if (!this.renderable.isCurrentAnimation("walk")) {
                             this.renderable.setCurrentAnimation("stand");
@@ -653,7 +656,7 @@ game.PlayerEntity = me.Entity.extend({
          // Add a collision shape
          this.body.addShape(new me.Rect(0, 0, this.width, this.height));
          // Set max speed. Keep the values the same as Merio's max speeds so he can ride on these reliably.
-         this.body.setMaxVelocity(4, 0);
+         this.body.setMaxVelocity(getMovingPlatformMaxSpeedX(), 0);
          // Set friction
          this.body.setFriction(0.5, 0);
          // Register the object as standard block
@@ -717,7 +720,7 @@ game.PlayerEntity = me.Entity.extend({
          // Add a collision shape
          this.body.addShape(new me.Rect(0, 0, this.width, this.height));
          // Set max speed
-         this.body.setMaxVelocity(0, 1);
+         this.body.setMaxVelocity(0, getMovingPlatformMaxSpeedY());
          // Set friction
          this.body.setFriction(0.5, 0);
          // Register the object as standard block
@@ -757,6 +760,7 @@ game.PlayerEntity = me.Entity.extend({
      onCollision: function (response, other) {
          // When riding up, prevent the collision boxes from mashing which stops jumping
          // Check for overlap, so this is only applied when standing on top of the platform
+         /** WARNING! THIS WILL NOT WORK IN A GRAVITY ZONE! THE Y VELOCITY IS TOO LOW AND DOES NOTHING! **/
          if (detectMerio(other.name)) {
             if (this.walkUp && (response.overlapV.y  > 0)){
                 other.body.vel.y = -other.body.maxVel.y * 0.1 * me.timer.tick;
@@ -779,8 +783,8 @@ game.PlayerEntity = me.Entity.extend({
      onCollision: function (response, other) {
          if (detectMerio(other.name)) {
             // Apply floaty motion
-            other.body.gravity.y = 0.1;
-            other.body.maxVel.y = 5;
+            other.body.gravity.y = getPlayerSlowedGravityY();
+            other.body.maxVel.y = getPlayerSlowedSpeedY();
             // Just a visual reminder of floaty behaviour
             other.renderable.setOpacity(0.5);
          }

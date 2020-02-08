@@ -17,6 +17,48 @@ function getHairHeight() {
     return 20;
 }
 
+// Gets the maximum horizontal speed of Merio
+function getPlayerMaxSpeedX() {
+    return 4;
+}
+
+// Gets the maximum vertical speed of Merio
+function getPlayerMaxSpeedY() {
+    return 20;
+}
+
+// Gets the default gravity of Merio
+function getPlayerMaxGravityY() {
+    return 0.98;
+}
+
+// Gets the maximum vertical speed of Merio while in the gravity zone
+function getPlayerSlowedSpeedY() {
+    return getPlayerMaxSpeedY() / 4;
+}
+
+// Gets the lessened gravity of Merio while in the gravity zone
+function getPlayerSlowedGravityY() {
+    return getPlayerMaxGravityY() / 10;
+}
+
+// When on a moving platform, we want to be able to move around on it.
+// Use this value to make Merio slightly faster so he can move with the motion of the platform,
+// while also promoting a slight speed boost when running against it
+function getPlayerExtendedMaxSpeedX() {
+    return getMovingPlatformMaxSpeedX() * 1.34;
+}
+
+// Gets the maximum horizontal speed of a moving platform
+function getMovingPlatformMaxSpeedX() {
+    return 3;
+}
+
+// Gets the maximum horizontal speed of a moving platform
+function getMovingPlatformMaxSpeedY() {
+    return 2;
+}
+
 // Used for inCollision callbacks for applying player-specific collision logic
 function detectMerio(entityName) {
     return entityName === "mainPlayer";
