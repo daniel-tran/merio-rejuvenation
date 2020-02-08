@@ -237,9 +237,13 @@ game.PlayerEntity = me.Entity.extend({
                 return false;
             default:
                 // Gravity zones cause strange behaviour when colliding with moving platforms.
-                // Manually ensure the falling state is registered correctly in such cases.
+                // These are manual speed fix-ups that try to alleviate scenarios such as:
+                // - Jumping in the gravity zone from a moving platform while hanging on with your hair
+                // - Jumping in the gravity zone and colliding with the moving platform while in mid-air
                 if (other.name === "GravityEntity" && this.body.vel.y < 0) {
-                    this.body.falling = true;
+                    this.body.force.x = 0;
+                    /** WARNING! THIS WILL PLAY THE JUMP ANIMATION WHEN HANGING FROM Y-AXIS MOVING PLATFORMS IN THE GRAVITY ZONE! **/
+                    this.renderable.setCurrentAnimation("jump");
                 }
                 // Player is free to pass through in any case
                 return false;
@@ -819,7 +823,6 @@ game.PlayerEntity = me.Entity.extend({
      onCollision: function (response, other) {
          // When riding up, prevent the collision boxes from mashing which stops jumping
          // Check for overlap, so this is only applied when standing on top of the platform
-         /** WARNING! THIS WILL NOT WORK IN A GRAVITY ZONE! THE Y VELOCITY IS TOO LOW AND DOES NOTHING! **/
          if (detectMerio(other.name)) {
             if (this.walkUp && (response.overlapV.y  > 0)){
                 other.body.vel.y = -other.body.maxVel.y * 0.1 * me.timer.tick;

@@ -33,7 +33,7 @@
   <object id="26" name="CoinEntity" x="64" y="448" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="8" name="GravityZone">
-  <object id="47" name="GravityEntity" x="54" y="128" width="352" height="160"/>
+  <object id="47" name="GravityEntity" x="640" y="192" width="352" height="160"/>
  </objectgroup>
  <objectgroup id="5" name="Enemy">
   <object id="27" name="MonstoidEntity" x="576" y="448" width="224" height="48"/>
