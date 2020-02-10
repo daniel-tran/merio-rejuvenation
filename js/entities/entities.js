@@ -641,6 +641,10 @@ game.PlayerEntity = me.Entity.extend({
          if (!this.settings.messageIndex) {
              this.settings.messageIndex = 0;
          }
+         // Set the redirect property when the box guy is intended to transition the player to a new screen
+         if (!this.settings.redirect) {
+             this.settings.redirect = "";
+         }
 
          // List of all possible messages the box guy can say.
          // Select a set of responses by defining the messageIndex custom property on a BoxGuyEntity in the tilemap.
@@ -662,6 +666,12 @@ game.PlayerEntity = me.Entity.extend({
             if (this.messageSubIndex >= this.messageLength) {
                 this.messageSubIndex = -1;
                 toggleResume(true, "");
+
+                // Transition to a new screen (if any) once all the messages have been read
+                if (this.settings.redirect) {
+                    MakeshiftFlashAnimation();
+                    me.levelDirector.loadLevel(this.settings.redirect);
+                }
             }
          };
      },

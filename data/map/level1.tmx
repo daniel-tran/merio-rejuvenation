@@ -125,6 +125,7 @@
   <object id="49" name="BoxGuyEntity" x="1568" y="320" width="38" height="38">
    <properties>
     <property name="messageIndex" type="int" value="1"/>
+    <property name="redirect" value="level2"/>
    </properties>
   </object>
   <object id="50" x="1152" y="352" width="32" height="160"/>
