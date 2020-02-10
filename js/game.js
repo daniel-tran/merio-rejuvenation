@@ -10,7 +10,10 @@ var game = {
         initialLives: 3,
         // score and lives. These are set in play.js when it realises a new game is starting
         score : 0,
-        lives : 0
+        lives : 0,
+        // Indicates if flash blocks are to be rendered as usable
+        flashBlockTimer : 500,
+        flashBlockTimerMax : 500,
     },
 
 
@@ -57,6 +60,10 @@ var game = {
         me.pool.register("MovingPlatformYEntity", game.MovingPlatformYEntity);
         me.pool.register("GravityEntity", game.GravityEntity);
         me.pool.register("TrampolineEntity", game.TrampolineEntity);
+
+        // Register experimental entities, even though they aren't included in the main game
+        me.pool.register("FlashBlockTriggerEntity", game.FlashBlockTriggerEntity);
+        me.pool.register("FlashBlockEntity", game.FlashBlockEntity);
 
         // Register all custom GUI entities
         me.pool.register("MessageButtonEntity", game.MessageButtonEntity);

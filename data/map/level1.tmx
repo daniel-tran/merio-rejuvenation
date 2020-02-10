@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="59">
+<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="63">
  <tileset firstgid="1" source="area01_level_tiles.tsx"/>
  <tileset firstgid="141" source="all_tiles.tsx"/>
  <imagelayer id="9" name="Background">
@@ -34,6 +34,8 @@
  </objectgroup>
  <objectgroup id="8" name="GravityZone">
   <object id="47" name="GravityEntity" x="640" y="192" width="352" height="160"/>
+  <object id="59" name="FlashBlockTriggerEntity" x="512" y="320" width="32" height="32"/>
+  <object id="60" name="FlashBlockEntity" x="512" y="416" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="5" name="Enemy">
   <object id="27" name="MonstoidEntity" x="576" y="448" width="224" height="48"/>
