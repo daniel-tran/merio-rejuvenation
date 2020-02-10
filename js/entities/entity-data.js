@@ -64,6 +64,28 @@ function detectMerio(entityName) {
     return entityName === "mainPlayer";
 }
 
+// Used to play the background music for various levels without needing to change game states
+function playBGM() {
+    let currentLevel = me.levelDirector.getCurrentLevel().name;
+    let currentBGM = me.audio.getCurrentTrack();
+    let expectedBGM = currentBGM;
+
+    // Play an overworld theme song
+    switch (currentLevel) {
+        case "level1": expectedBGM = "forest_theme"; break;
+        case "level2": expectedBGM = "industrial_theme"; break;
+        case "level3": expectedBGM = "space_theme"; break;
+        case "_startmenu": me.audio.stopTrack(); break;
+        case "gameover": me.audio.stopTrack(); break;
+    }
+
+    // Only play the music if isn't already playing, otherwises the music will reset to the beginning
+    if (currentBGM != expectedBGM) {
+        me.audio.stopTrack();
+        me.audio.playTrack(expectedBGM);
+    }
+}
+
 // Shows/Hides the message modal from index.html and sets its main body of text
 function toggleMessage(message, isShown) {
     let textStatus = ["none", "block"];

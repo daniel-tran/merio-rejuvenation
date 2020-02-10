@@ -52,6 +52,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
      * update function
      */
     update : function () {
+        // This is present in all screens, so it can be used to determine the background music.
+        playBGM();
         // we don't do anything fancy here, so just
         // return true if the score has been updated
         if (this.score !== game.data.score) {
