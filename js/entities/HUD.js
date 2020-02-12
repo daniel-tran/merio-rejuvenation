@@ -39,8 +39,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
         // (size does not matter here)
         this._super(me.Renderable, 'init', [x, y, 10, 10]);
         
-        // Assign the font
-        this.font = new me.BitmapText(0, 0, {font: "PressStart2P"});
+        // Define a font using existing CSS styles. Mandatory properties are font and size.
+        this.font = new me.Text(0, 0, {font: "Arial", size: 32, fillStyle: "#FFFFFF"});
         this.font.textAlign = "right";
         this.font.textBaseline = "top";
 
