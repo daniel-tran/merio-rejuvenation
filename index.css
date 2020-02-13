@@ -60,12 +60,14 @@ body {
 /* Modal message */
 #messageContents {
   color: #000000;
+  font-family: "Verdana";
 }
 
 /* The Close Button */
 .close {
   color: #aaaaaa;
   float: right;
+  font-family: monospace;
   font-size: 28px;
   font-weight: bold;
 }
