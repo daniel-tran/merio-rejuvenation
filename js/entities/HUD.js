@@ -46,6 +46,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
 
         // local copy of the global score
         this.score = -1;
+        
+        this.lifeImage = me.loader.getImage("LIFES");
     },
 
     /**
@@ -69,8 +71,12 @@ game.HUD.ScoreItem = me.Renderable.extend({
     draw : function (context) {
         if (isGameLevel()) {
             // pos variables are relative to the viewport origin
-            this.font.draw(context, `Score: ${game.data.score}`, me.game.viewport.width * 0.90 + this.pos.x, me.game.viewport.height * 0.10 + this.pos.y);
-            this.font.draw(context, `Lifes: ${game.data.lives}`, me.game.viewport.width * 0.90 + this.pos.x, me.game.viewport.height * 0.25 + this.pos.y);
+            this.font.draw(context, `Score: ${game.data.score}`, me.game.viewport.width * 0.40 + this.pos.x, me.game.viewport.height * 0.10 + this.pos.y);
+            // Draw remaining lives as a series of images
+            for (let i = 0; i < game.data.lives; i++) {
+                // The X postition calculation draws the images from right to left, ensuring that lives are depleted from left to right.
+                context.drawImage(this.lifeImage, me.game.viewport.width * 0.90 - (this.lifeImage.width * i), 32, this.lifeImage.width, this.lifeImage.height);
+            }
         }
     }
 
