@@ -39,10 +39,8 @@ game.HUD.ScoreItem = me.Renderable.extend({
         // (size does not matter here)
         this._super(me.Renderable, 'init', [x, y, 10, 10]);
         
-        // Define a font using existing CSS styles. Mandatory properties are font and size.
-        this.font = new me.Text(0, 0, {font: "Arial", size: 32, fillStyle: "#FFFFFF"});
-        this.font.textAlign = "right";
-        this.font.textBaseline = "top";
+        // Define a font using local .fnt and .png images.
+        this.font = new me.BitmapText(0, 0, {font: "verdana", size: 1, textAlign: "left", textBaseline: "top"});
 
         // local copy of the global score
         this.score = -1;
@@ -70,12 +68,14 @@ game.HUD.ScoreItem = me.Renderable.extend({
      */
     draw : function (context) {
         if (isGameLevel()) {
+            // Space buffer from the top of the screen
+            let offsetY = 32;
             // pos variables are relative to the viewport origin
-            this.font.draw(context, `Score: ${game.data.score}`, me.game.viewport.width * 0.40 + this.pos.x, me.game.viewport.height * 0.10 + this.pos.y);
+            this.font.draw(context, `Numero: ${game.data.score}`, me.game.viewport.width * 0.05 + this.pos.x, offsetY);
             // Draw remaining lives as a series of images
             for (let i = 0; i < game.data.lives; i++) {
                 // The X postition calculation draws the images from right to left, ensuring that lives are depleted from left to right.
-                context.drawImage(this.lifeImage, me.game.viewport.width * 0.90 - (this.lifeImage.width * i), 32, this.lifeImage.width, this.lifeImage.height);
+                context.drawImage(this.lifeImage, me.game.viewport.width * 0.90 - (this.lifeImage.width * i), offsetY, this.lifeImage.width, this.lifeImage.height);
             }
         }
     }
