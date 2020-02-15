@@ -835,7 +835,7 @@ game.PlayerEntity = me.Entity.extend({
          // Check for overlap, so this is only applied when standing on top of the platform
          if (detectMerio(other.name)) {
             if (this.walkUp && (response.overlapV.y  > 0)){
-                other.body.vel.y = -other.body.maxVel.y * 0.1 * me.timer.tick;
+                other.body.vel.y = -other.body.maxVel.y * 0.2 * me.timer.tick;
             }
          }
          return false;
