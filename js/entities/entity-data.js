@@ -19,12 +19,12 @@ function getHairHeight() {
 
 // Gets the maximum horizontal speed of Merio
 function getPlayerMaxSpeedX() {
-    return 3.5;
+    return 3;
 }
 
 // Gets the maximum vertical speed of Merio
 function getPlayerMaxSpeedY() {
-    return 15;
+    return 17;
 }
 
 // Gets the default gravity of Merio
@@ -46,18 +46,29 @@ function getPlayerSlowedGravityY() {
 // Use this value to make Merio slightly faster so he can move with the motion of the platform,
 // while also promoting a slight speed boost when running against it
 function getPlayerExtendedMaxSpeedX() {
-    return getMovingPlatformMaxSpeedX() * 1.34;
+    return getMovingPlatformMaxSpeedX() * 1.5;
 }
 
 // Gets the maximum horizontal speed of a moving platform
 function getMovingPlatformMaxSpeedX() {
-    return 3;
+    return 2;
 }
 
 // Gets the maximum horizontal speed of a moving platform
 function getMovingPlatformMaxSpeedY() {
     return 2;
 }
+
+// Gets the maximum horizontal speed of moving enemies. Conventionally, they are usually slower than the player.
+function getEnemyMaxSpeedX() {
+    return 1;
+}
+
+// Gets the maximum vertical speed of moving enemies. Conventionally, they deliberately move slow to make then avoidable.
+function getEnemyMaxSpeedY() {
+    return 1;
+}
+
 
 // Gets the JSON object containing default font settings
 function getDefaultFontSettings() {

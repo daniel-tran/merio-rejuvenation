@@ -308,7 +308,7 @@ game.PlayerEntity = me.Entity.extend({
          // Add a collision shape
          this.body.addShape(new me.Rect(0, 0, this.width, this.height));
          // Set max speed
-         this.body.setMaxVelocity(2, 0);
+         this.body.setMaxVelocity(getEnemyMaxSpeedX(), 0);
          // Set friction
          this.body.setFriction(0.5, 0);
          // Enable physic collisions
@@ -386,7 +386,7 @@ game.PlayerEntity = me.Entity.extend({
          // Add a collision shape
          this.body.addShape(new me.Rect(0, 0, this.width, this.height));
          // Set max speed
-         this.body.setMaxVelocity(2, 0);
+         this.body.setMaxVelocity(getEnemyMaxSpeedX(), 0);
          // Enable physic collisions
          this.isKinematic = false;
          // Update the player when outside the viewport
@@ -441,7 +441,7 @@ game.PlayerEntity = me.Entity.extend({
          // Add a collision shape
          this.body.addShape(new me.Rect(0, 0, this.width, this.height));
          // Set max speed
-         this.body.setMaxVelocity(0, 2);
+         this.body.setMaxVelocity(0, getEnemyMaxSpeedY());
          // Enable physic collisions
          this.isKinematic = false;
          // Update the player when outside the viewport
