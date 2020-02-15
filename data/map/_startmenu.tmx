@@ -41,12 +41,14 @@
  <objectgroup id="4" name="Button">
   <object id="42" name="MessageButtonEntity" x="128" y="128" width="32" height="32">
    <properties>
+    <property name="label" value="Controls"/>
     <property name="message">Use the ARROW keys to move around.
 Press UP to jump, when you're not surrounded by trampolines.</property>
    </properties>
   </object>
   <object id="43" name="MessageButtonEntity" x="128" y="64" width="32" height="32">
    <properties>
+    <property name="label" value="Start Game"/>
     <property name="redirect" value="level1"/>
    </properties>
   </object>

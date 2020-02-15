@@ -38,9 +38,12 @@ game.HUD.ScoreItem = me.Renderable.extend({
         // call the parent constructor
         // (size does not matter here)
         this._super(me.Renderable, 'init', [x, y, 10, 10]);
-        
-        // Define a font using local .fnt and .png images.
-        this.font = new me.BitmapText(0, 0, {font: "verdana", size: 1, textAlign: "left", textBaseline: "top"});
+
+        // Space buffer from the top of the screen
+        this.offsetY = 32;
+
+        // Score label needs to be persistent between levels, so it is manually set up and drawn as needed
+        this.scoreLabel = new me.BitmapText(0, 0, getDefaultFontSettings());
 
         // local copy of the global score
         this.score = -1;
@@ -68,16 +71,13 @@ game.HUD.ScoreItem = me.Renderable.extend({
      */
     draw : function (context) {
         if (isGameLevel()) {
-            // Space buffer from the top of the screen
-            let offsetY = 32;
-            // pos variables are relative to the viewport origin
-            this.font.draw(context, `Numero: ${game.data.score}`, me.game.viewport.width * 0.05 + this.pos.x, offsetY);
+            // Print the score display, which should not be drawn on non-levels such as the main menu
+            this.scoreLabel.draw(context, `Numero: ${game.data.score}`, me.game.viewport.width * 0.05 + this.pos.x, this.offsetY);
             // Draw remaining lives as a series of images
             for (let i = 0; i < game.data.lives; i++) {
                 // The X postition calculation draws the images from right to left, ensuring that lives are depleted from left to right.
-                context.drawImage(this.lifeImage, me.game.viewport.width * 0.90 - (this.lifeImage.width * i), offsetY, this.lifeImage.width, this.lifeImage.height);
+                context.drawImage(this.lifeImage, me.game.viewport.width * 0.90 - (this.lifeImage.width * i), this.offsetY, this.lifeImage.width, this.lifeImage.height);
             }
         }
     }
-
 });

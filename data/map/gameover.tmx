@@ -10,11 +10,13 @@
  <objectgroup id="4" name="Button">
   <object id="42" name="MessageButtonEntity" x="96" y="288" width="32" height="32">
    <properties>
+    <property name="label" value="Give Up!"/>
     <property name="redirect" value="_startmenu"/>
    </properties>
   </object>
   <object id="43" name="MessageButtonEntity" x="96" y="224" width="32" height="32">
    <properties>
+    <property name="label" value="Restart Game"/>
     <property name="redirect" value="level1"/>
    </properties>
   </object>

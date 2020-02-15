@@ -59,6 +59,11 @@ function getMovingPlatformMaxSpeedY() {
     return 2;
 }
 
+// Gets the JSON object containing default font settings
+function getDefaultFontSettings() {
+    return {font: "verdana", size: 1};
+}
+
 // Used for inCollision callbacks for applying player-specific collision logic
 function detectMerio(entityName) {
     return entityName === "mainPlayer";

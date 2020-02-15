@@ -67,6 +67,7 @@ var game = {
 
         // Register all custom GUI entities
         me.pool.register("MessageButtonEntity", game.MessageButtonEntity);
+        me.pool.register("BasicTextEntity", game.BasicTextEntity);
         
         // Various key bindings for use in js\entities\entities.js
         me.input.bindKey(me.input.KEY.LEFT, "left");

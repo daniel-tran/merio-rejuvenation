@@ -21,7 +21,11 @@ game.MessageButtonEntity = me.GUI_Object.extend({
         if (!this.settings.redirect) {
             this.settings.redirect = "";
         }
-        
+        // label is the text displayed next to the button
+        if (!this.settings.label) {
+            this.settings.label = "";
+        }
+
         // Allow this entity to continue updates when the game is paused
         this.updateWhenPaused = true;
         
@@ -29,6 +33,12 @@ game.MessageButtonEntity = me.GUI_Object.extend({
         this.addAnimation("off", [0]);
         this.addAnimation("on", [1]);
         this.setCurrentAnimation("off");
+        
+        // If there is no label, save rendering resources by not adding an extra object to the world, which would be invisible anyway
+        if (this.settings.label.length > 0) {
+            let label = new game.BasicTextEntity(x + ( settings.framewidth * 1.5 ), y - ( settings.frameheight * 0.1 ), this.settings.label, settings);
+            me.game.world.addChild(label);
+        }
     },
     
     // Runs an action when the pointer enters the collision box
@@ -65,3 +75,25 @@ game.MessageButtonEntity = me.GUI_Object.extend({
         return false;
     }
 });
+
+/**
+* Generic text entity using BitmapText. Used display text in a single room.
+*/
+game.BasicTextEntity = me.GUI_Object.extend({
+   // Base initialisation
+   init: function (x, y, message, settings) {
+       this._super(me.GUI_Object, 'init', [x, y, settings]);
+
+       // Define a font using local .fnt and .png images.
+       this.font = new me.BitmapText(0, 0, getDefaultFontSettings());
+
+       this.message = message;
+   },
+   
+   /**
+    * draw the text
+    */
+   draw : function (context) {
+       this.font.draw(context, this.message, this.pos.x, this.pos.y);
+   }
+})
