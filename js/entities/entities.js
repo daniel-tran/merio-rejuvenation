@@ -678,7 +678,7 @@ game.PlayerEntity = me.Entity.extend({
      onCollision: function (response, other) {
          // Only react when the player jumps from below and hits the box guy
          if (detectMerio(other.name)) {
-            if ((response.overlapV.y < 0) && other.body.vel.y < 0){
+            if ((response.overlapV.y < 0) && other.body.vel.y <= 0){
                 // Print out specific messages from the list of possible messages
                 this.messageSubIndex = 0;
             }

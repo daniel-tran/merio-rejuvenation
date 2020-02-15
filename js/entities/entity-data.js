@@ -24,12 +24,12 @@ function getPlayerMaxSpeedX() {
 
 // Gets the maximum vertical speed of Merio
 function getPlayerMaxSpeedY() {
-    return 17;
+    return 11;
 }
 
 // Gets the default gravity of Merio
 function getPlayerMaxGravityY() {
-    return 0.98;
+    return 0.5;
 }
 
 // Gets the maximum vertical speed of Merio while in the gravity zone

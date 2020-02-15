@@ -120,7 +120,7 @@
   <object id="29" x="416" y="448" width="160" height="64"/>
   <object id="36" x="1152" y="320" width="64" height="32"/>
   <object id="39" name="MovingPlatformXEntity" x="672" y="128" width="416" height="32"/>
-  <object id="41" name="MovingPlatformYEntity" x="32" y="128" width="128" height="256"/>
+  <object id="41" name="MovingPlatformYEntity" x="32" y="160" width="128" height="256"/>
   <object id="49" name="BoxGuyEntity" x="1568" y="320" width="38" height="38">
    <properties>
     <property name="messageIndex" type="int" value="1"/>
