@@ -141,7 +141,7 @@ game.PlayerEntity = me.Entity.extend({
             }
         }
         
-        if (me.input.isKeyPressed("jump")) {
+        if (me.input.keyStatus("jump")) {
             // Can't jump while in mid-air
             if (!this.body.jumping && !this.body.falling) {
                 // Push the player up according to their Y axis force
