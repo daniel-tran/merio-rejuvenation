@@ -608,6 +608,96 @@ game.PlayerEntity = me.Entity.extend({
      }
  });
  
+   /**
+ * Cowface Boss entity
+ */
+ game.CowfaceBossEntity = me.Entity.extend({
+     init: function(x, y, settings) {
+
+        // Define the sprite here instead of in the tilemap
+        settings.image = "COWFACE";
+
+        // Call parent constructor to apply the custom changes
+        this._super(me.Entity, 'init', [x, y, settings]);
+
+        // Inherit any custom properties defined in the tile map
+        // Note that this can only be done when extending the Entity object
+        this.settings = settings;
+
+        // Add a new physic body
+        this.body = new me.Body(this);
+        // Add a collision shape
+        this.body.addShape(new me.Rect(0, 0, this.width, this.height));
+        // Set max speed
+        this.regularSpeedY = 10;
+        this.body.setMaxVelocity(0, this.regularSpeedY);
+        // Enable physic collisions
+        this.isKinematic = false;
+        // Update the player when outside the viewport
+        this.alwaysUpdate = true;
+
+        // Indicate which sprite is for idling
+        this.renderable.addAnimation("active", [0]);
+
+        // Indicate which sprite is for jumping
+        this.renderable.addAnimation("inactive", [1]);
+
+        // Default animation
+        this.renderable.setCurrentAnimation("active");
+
+        // Indicate whether this enemy cannot be defeated
+        this.undefeatable = true;
+
+        this.restTimerMax = 250
+        this.restTimer = 0;
+     },
+
+     update: function(dt) {
+        this.restTimer--;
+
+        if (this.restTimer <= 0) {
+            if (this.renderable.isCurrentAnimation("active")) {
+                // Cause the enemy to rest for a bit, allowing the player to pass by
+                this.renderable.setCurrentAnimation("inactive");
+                this.body.collisionType = me.collision.types.ACTION;
+                this.body.maxVel.y = 0;
+            } else {
+                // Cause the enemy to reactivate and move again
+                this.renderable.setCurrentAnimation("active");
+                this.body.collisionType = me.collision.types.ENEMY_OBJECT;
+                this.body.maxVel.y = this.regularSpeedY;
+            }
+
+            // Randomise when the next state change occurs
+            this.restTimer = Math.floor(Math.random() * this.restTimerMax);
+        }
+
+        // Only move when active, stop moving when inactive
+        if (this.renderable.isCurrentAnimation("active")){
+           // Keep vertical movement within the height of the level
+           if (this.pos.y > ( me.game.world.height - this.height )) {
+               this.body.force.y = -this.regularSpeedY;
+           } else if (this.pos.y < 0) {
+               this.body.force.y = this.regularSpeedY;
+           }
+        }
+
+        // Check and update movement
+        this.body.update(dt);
+
+        // Evaluates to true if the enemy moved or the update function was called
+        return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
+     },
+
+     draw : function (context) {
+        // Manually scale the sprite by modifying the underlying 3x3 matrix
+        // As a side effect, the bounding box is also scaled after the sprite has been scaled
+        context.currentTransform.val[0] = 4;
+        context.currentTransform.val[4] = 4;
+        this.renderable.draw(context);
+     }
+ });
+ 
  /**
  * Red box entity
  */

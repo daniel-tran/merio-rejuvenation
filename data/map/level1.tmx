@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="63">
+<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="12" nextobjectid="65">
  <tileset firstgid="1" source="all_tiles.tsx"/>
  <imagelayer id="9" name="Background">
   <image source="../img/backdrop/backdrop_level1.png" width="512" height="512"/>
@@ -50,6 +50,11 @@
    </properties>
   </object>
   <object id="58" name="SnowmanEntity" x="1088" y="464" width="48" height="48"/>
+  <object id="63" name="CowfaceBossEntity" x="1408" y="64" width="192" height="192">
+   <properties>
+    <property name="active" type="bool" value="false"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="3" name="collision">
   <object id="10" x="512" y="192" width="64.0415" height="31.7399">
