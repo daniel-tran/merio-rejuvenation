@@ -738,10 +738,7 @@ game.PlayerEntity = me.Entity.extend({
 
          // List of all possible messages the box guy can say.
          // Select a set of responses by defining the messageIndex custom property on a BoxGuyEntity in the tilemap.
-         this.messages = [
-            ["ARG?"],
-            ["WHOOP, WE FOUND IT", "HOW ABOUT YOU"],
-         ];
+         this.messages = getAllMessages();
          this.messageLength = this.messages[this.settings.messageIndex].length;
          // Use a subindex to detect which message in the individual sets to display
          this.messageSubIndex = -1;

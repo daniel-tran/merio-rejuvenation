@@ -69,6 +69,13 @@ function getEnemyMaxSpeedY() {
     return 1;
 }
 
+// Gets all possible messages + submessages that the Box guys can display. Mostly used in the BoxGuyEntity init callback.
+function getAllMessages() {
+    return [
+        ["ARG?"],
+        ["WHOOP, WE FOUND IT", "HOW ABOUT YOU"],
+    ]
+}
 
 // Gets the JSON object containing default font settings
 function getDefaultFontSettings() {
