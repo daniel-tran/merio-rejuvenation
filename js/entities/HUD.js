@@ -63,6 +63,10 @@ game.HUD.ScoreItem = me.Renderable.extend({
             this.score = game.data.score;
             return true;
         }
+        // When on any menu screen, it usually indicates that the game is currently not active
+        if (!isGameLevel()) {
+            resetScoreAndLives();
+        }
         return false;
     },
 

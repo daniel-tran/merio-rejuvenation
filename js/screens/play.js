@@ -11,8 +11,7 @@ game.PlayScreen = me.Stage.extend({
         
         // reset the score and life count when starting a new game
         if (game.data.lives <= 0) {
-            game.data.lives = game.data.initialLives;
-            game.data.score = game.data.initialScore;
+            resetScoreAndLives();
         }
 
         // Add our HUD to the game world, add it last so that this is on top of the rest.
