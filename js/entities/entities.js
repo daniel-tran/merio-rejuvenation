@@ -63,8 +63,9 @@ game.PlayerEntity = me.Entity.extend({
         // Actions for when if Merio has died. This cannot be done in the onCollision callback,
         // as Merio actually collides with enemies multiple times, triggering these more than once per life.
         if (!this.alive) {
-            // Reduce the life count
+            // Reduce the life count and score
             game.data.lives--;
+            game.data.score -= 100;
             if (game.data.lives <= 0) {
                 // GAME IS OVER
                 // Keep lives at 0, so that it doesn't spike into the negative values
