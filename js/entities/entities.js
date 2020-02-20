@@ -937,6 +937,10 @@ game.PlayerEntity = me.Entity.extend({
      // Base initialisation
      init: function (x, y, settings) {
          this._super(me.CollectableEntity, 'init', [x, y, settings]);
+
+         // This entity repeats a sprite across the tiles it covers, but it cannot be
+         // initialised correctly since a reference to the draw renderer is required.
+         this.pattern = undefined;
      },
      
      // Collision event
@@ -949,6 +953,16 @@ game.PlayerEntity = me.Entity.extend({
             other.renderable.setOpacity(0.5);
          }
          return false;
+     },
+
+     draw : function (context) {
+         if (!this.pattern) {
+             // Most likely the first invocation to the draw callback, so use the draw
+             // renderer to create a pattern and reference it in all future draw callbacks.
+             this.pattern = context.createPattern("GRAVITYZONE", "repeat");
+         }
+         // Draw the pattern across the tilkes covered by this entity
+         context.drawPattern(this.pattern, 0, 0, this.width, this.height);
      }
  });
  
