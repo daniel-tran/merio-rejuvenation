@@ -178,6 +178,7 @@ function manualMessageUpdate() {
         // time and finding this current instance is just a matter of looping over the entities with the same names.
         if (boxguys[i].messageSubIndex >= 0) {
             boxguys[i].nextMessage();
+            break;
         }
     }
 }
