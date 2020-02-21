@@ -13,10 +13,13 @@
   </data>
  </layer>
  <objectgroup id="6" name="NextLevel">
-  <object id="37" name="me.LevelEntity" x="1216" y="448" width="64" height="64">
+  <object id="37" name="me.LevelEntity" x="1216" y="384" width="128" height="128">
    <properties>
     <property name="duration" type="int" value="250"/>
     <property name="fade" type="color" value="#ffffffff"/>
+    <property name="frameheight" type="int" value="128"/>
+    <property name="framewidth" type="int" value="128"/>
+    <property name="image" value="PORTAL"/>
     <property name="to" value="level2"/>
    </properties>
   </object>
