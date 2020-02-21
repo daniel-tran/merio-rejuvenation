@@ -29,8 +29,8 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="4" name="Coin">
-  <object id="26" name="CoinEntity" x="64" y="448" width="32" height="32">
+ <objectgroup id="4" name="SecretCollectable">
+  <object id="26" name="SecretCollectableEntity" x="64" y="448" width="32" height="32">
    <properties>
     <property name="framewidth" type="int" value="32"/>
     <property name="image" value="spinning_coin_gold"/>
