@@ -257,9 +257,9 @@ game.PlayerEntity = me.Entity.extend({
 
 
 /**
- * Coin entity
+ * Secret collectable entity
  */
- game.CoinEntity = me.CollectableEntity.extend({
+ game.SecretCollectableEntity = me.CollectableEntity.extend({
      // Base initialisation
      init: function (x, y, settings) {
          settings.image = "SECRET";
