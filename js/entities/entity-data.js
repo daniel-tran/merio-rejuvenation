@@ -141,10 +141,10 @@ function toggleResume(isResuming, message) {
 // In game.js, two states are linked to the same GameScreen. So as long as the state
 // is toggled between those two states, the transition effect will always play.
 function MakeshiftFlashAnimation() {
-    if (me.state.isCurrent(me.state.GAME_END)) {
+    if (me.state.isCurrent(me.state.FLASH_ANIMATION)) {
         me.state.change(me.state.PLAY);
     } else {
-        me.state.change(me.state.GAME_END);
+        me.state.change(me.state.FLASH_ANIMATION);
     }
 }
 
