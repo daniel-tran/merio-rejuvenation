@@ -19,7 +19,7 @@ function getHairHeight() {
 
 // Gets the maximum horizontal speed of Merio
 function getPlayerMaxSpeedX() {
-    return 3;
+    return 3.25;
 }
 
 // Gets the maximum vertical speed of Merio
@@ -29,7 +29,7 @@ function getPlayerMaxSpeedY() {
 
 // Gets the default gravity of Merio
 function getPlayerMaxGravityY() {
-    return 0.5;
+    return 0.48;
 }
 
 // Gets the maximum vertical speed of Merio while in the gravity zone
