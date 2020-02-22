@@ -599,15 +599,14 @@ game.PlayerEntity = me.Entity.extend({
          return (this._super(me.Entity, 'update', [dt]) || this.body.vel.x !== 0 || this.body.vel.y !== 0);
      },
      onCollision: function(response, other) {
-         if (response.b.body.collisionType !== me.collision.types.WORLD_SHAPE) {
+         if (detectMerio(other.name) && response.b.body.collisionType !== me.collision.types.WORLD_SHAPE) {
              // Basically die if the enemy was jumped on
              if (this.alive && (response.overlapV.y  > 0) && response.a.body.falling) {
                  this.alive = false;
              }
-             return false;
          }
-         // All other objects are solid
-         return true;
+         // All other objects are not solid
+         return false;
      }
  });
  
