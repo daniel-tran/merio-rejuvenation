@@ -181,5 +181,9 @@ function getAllMessages() {
         ["Hey ho, Merio! We're finally living in the future! Through an internet browser! Using those new-fangled \"HTML\" and \"JavaScript\" doodads that those technical folks keep whining about. And look! The game doesn't lag anymore when you move around! Anyway, you'd better get going to progress on your adventure - I'm starting to get motion sickness from all the physics optimisations in this game engine..."],
         ["Watch the enemy's movements carefully and use the power of the arrow keys to outsmart them!"],
         ["To complete your haphazard quest to find happiness, you'll need to jump through these jiggling portals.", "This particular portal smells like kerosene. Mmmm..."],
+
+        ["My cousins work here as moving platforms, so they'll give you a ride to wherever they feel like going."],
+        ["These snowmen are on strike for higher wages and better working conditions. Crush those lads like the corporate giant you are!", "But remember, if you try to jump on multiple stacks of snowmen, they can do a surprise attack that hurts you."],
+        ["Using the magical art of \"collision detection\", you can do a boosted jump when you get sandwiched by moving platforms. It's as if you're immune to the laws of physics!"],
     ];
 }
