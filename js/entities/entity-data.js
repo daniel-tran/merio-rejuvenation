@@ -69,14 +69,6 @@ function getEnemyMaxSpeedY() {
     return 1;
 }
 
-// Gets all possible messages + submessages that the Box guys can display. Mostly used in the BoxGuyEntity init callback.
-function getAllMessages() {
-    return [
-        ["ARG?"],
-        ["WHOOP, WE FOUND IT", "HOW ABOUT YOU"],
-    ]
-}
-
 // Gets the JSON object containing default font settings
 function getDefaultFontSettings() {
     return {font: "verdana", size: 1};
@@ -181,4 +173,13 @@ function manualMessageUpdate() {
             break;
         }
     }
+}
+
+// Gets all possible messages + submessages that the Box guys can display. Mostly used in the BoxGuyEntity init callback.
+function getAllMessages() {
+    return [
+        ["Hey ho, Merio! We're finally living in the future! Through an internet browser! Using those new-fangled \"HTML\" and \"JavaScript\" doodads that those technical folks keep whining about. And look! The game doesn't lag anymore when you move around! Anyway, you'd better get going to progress on your adventure - I'm starting to get motion sickness from all the physics optimisations in this game engine..."],
+        ["Watch the enemy's movements carefully and use the power of the arrow keys to outsmart them!"],
+        ["To complete your haphazard quest to find happiness, you'll need to jump through these jiggling portals.", "This particular portal smells like kerosene. Mmmm..."],
+    ];
 }

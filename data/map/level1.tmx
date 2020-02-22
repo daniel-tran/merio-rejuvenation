@@ -76,7 +76,7 @@
   <object id="36" x="2624" y="32" width="32" height="96"/>
   <object id="49" name="BoxGuyEntity" x="6080" y="352" width="38" height="38">
    <properties>
-    <property name="messageIndex" type="int" value="1"/>
+    <property name="messageIndex" type="int" value="2"/>
    </properties>
   </object>
   <object id="50" x="1440" y="288" width="64" height="224"/>
