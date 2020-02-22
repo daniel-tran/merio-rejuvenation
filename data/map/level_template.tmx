@@ -81,10 +81,6 @@
   <object id="58" name="SnowmanEntity" x="480" y="128" width="48" height="48"/>
  </objectgroup>
  <objectgroup id="2" name="Player">
-  <object id="8" name="mainPlayer" x="128" y="448" width="48" height="48">
-   <properties>
-    <property name="image" value="MERIO"/>
-   </properties>
-  </object>
+  <object id="8" name="mainPlayer" x="128" y="448" width="48" height="48"/>
  </objectgroup>
 </map>

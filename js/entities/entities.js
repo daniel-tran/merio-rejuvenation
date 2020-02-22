@@ -7,6 +7,8 @@ game.PlayerEntity = me.Entity.extend({
      * constructor
      */
     init:function (x, y, settings) {
+        // Define the sprite here instead of in the tilemap
+        settings.image = "MERIO";
         // call the constructor
         this._super(me.Entity, 'init', [x, y , settings]);
         
