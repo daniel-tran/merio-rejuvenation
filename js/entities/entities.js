@@ -769,6 +769,8 @@ game.PlayerEntity = me.Entity.extend({
             if ((response.overlapV.y < 0) && other.body.vel.y <= 0){
                 // Print out specific messages from the list of possible messages
                 this.messageSubIndex = 0;
+                // Force the player to fall down to prevent multiple message registrations
+                other.body.vel.y = 0;
             }
          }
          return false;
