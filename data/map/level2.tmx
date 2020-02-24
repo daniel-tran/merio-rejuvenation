@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="20" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#ffffff" nextlayerid="8" nextobjectid="135">
+<map version="1.2" tiledversion="1.3.1" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="200" height="20" tilewidth="32" tileheight="32" infinite="0" backgroundcolor="#ffffff" nextlayerid="8" nextobjectid="136">
  <tileset firstgid="1" source="all_tiles.tsx"/>
  <imagelayer id="6" name="Background">
   <image source="../img/backdrop/backdrop_level2.png" width="512" height="512"/>
@@ -28,7 +28,7 @@
   <object id="8" name="mainPlayer" x="32" y="448" width="48" height="48"/>
  </objectgroup>
  <objectgroup id="4" name="SecretCollectable">
-  <object id="26" name="SecretCollectableEntity" x="4160" y="480" width="32" height="32"/>
+  <object id="26" name="SecretCollectableEntity" x="4160" y="464" width="32" height="32"/>
  </objectgroup>
  <objectgroup id="5" name="Enemy">
   <object id="42" name="MonstoidEntity" x="896" y="448" width="320" height="48"/>
@@ -41,7 +41,7 @@
   <object id="63" name="MonstoidEntity" x="3488" y="160" width="320" height="48"/>
   <object id="64" name="MonstoidEntity" x="3808" y="320" width="320" height="48"/>
   <object id="67" name="SnowmanEntity" x="4928" y="384" width="48" height="48"/>
-  <object id="68" name="SnowmanEntity" x="4800" y="256" width="48" height="48"/>
+  <object id="68" name="SnowmanEntity" x="4672" y="64" width="48" height="48"/>
   <object id="69" name="SnowmanEntity" x="4672" y="128" width="48" height="48"/>
   <object id="70" name="SnowmanEntity" x="4672" y="192" width="48" height="48"/>
   <object id="71" name="SnowmanEntity" x="4672" y="320" width="48" height="48"/>
