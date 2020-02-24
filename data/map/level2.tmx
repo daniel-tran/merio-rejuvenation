@@ -20,7 +20,7 @@
     <property name="frameheight" type="int" value="128"/>
     <property name="framewidth" type="int" value="128"/>
     <property name="image" value="PORTAL"/>
-    <property name="to" value="_startmenu"/>
+    <property name="to" value="level3"/>
    </properties>
   </object>
  </objectgroup>
