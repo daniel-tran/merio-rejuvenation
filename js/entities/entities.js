@@ -700,6 +700,26 @@ game.PlayerEntity = me.Entity.extend({
      }
  });
  
+  /**
+ * Environmental chasm entity - when the player falls outside certain bounds of the map
+ */
+ game.ChasmEntity = me.Entity.extend({
+     init: function(x, y, settings) {
+         // Call parent constructor to apply the custom changes
+         this._super(me.Entity, 'init', [x, y, settings]);
+
+         // Add a new physic body
+         this.body = new me.Body(this);
+         // Add a collision shape
+         this.body.addShape(new me.Rect(0, 0, this.width, this.height));
+         // Enable physic collisions
+         this.isKinematic = false;
+
+         // Indicate whether this enemy cannot be defeated
+         this.undefeatable = true;
+     }
+ });
+ 
  /**
  * Red box entity
  */
