@@ -185,5 +185,10 @@ function getAllMessages() {
         ["My cousins work here as moving platforms, so they'll give you a ride to wherever they feel like going."],
         ["These snowmen are on strike for higher wages and better working conditions. Crush those lads like the corporate giant you are!", "But remember, if you try to jump on multiple stacks of snowmen, they can do a surprise attack that hurts you."],
         ["Using the magical art of \"collision detection\", you can do a boosted jump when you get sandwiched by moving platforms. It's as if you're immune to the laws of physics!"],
+
+        ["Y'see that pink space dust over there? Inhaling that stuff makes you all floaty and stuff!", "Remember, the effects of the moon dust are only active when you're within the pink area, although you can extend its duration by jumping out of it."],
+        ["Cows in space? I guess that's why they call our galaxy \"The Milky Way\"! Hah!", "Anyway, if you can make them fall asleep, you can pass by them without getting hurt."],
+        ["This next part of the level looks like a real doozy. You'll have to time your jumps and movements just right to make it over those cow-faced scoundrels."],
+        ["I'm going to be blunt with you, Merio - this guy is BIG. Bigger than those Poppin Fresh guys from the first game, I'm pretty sure. And it looks like it's willing to do everything in its power to stop you from finding happiness.", "But don't let its speed or size fool you. It appears to tire itself out every now and then, but tends to wake up randomly so you'll need to pick a good opportunity to run past it..."],
     ];
 }
