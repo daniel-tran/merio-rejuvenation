@@ -978,15 +978,11 @@ game.PlayerEntity = me.Entity.extend({
          return false;
      },
 
-     draw : function (context) {
-         if (!this.pattern) {
-             // Most likely the first invocation to the draw callback, so use the draw
-             // renderer to create a pattern and reference it in all future draw callbacks.
-             this.pattern = context.createPattern("GRAVITYZONE", "repeat");
-         }
-         // Draw the pattern across the tilkes covered by this entity
-         context.drawPattern(this.pattern, 0, 0, this.width, this.height);
-     }
+     // CANNOT DRAW TILED SPRITES AS A TEXTURE!
+     // This results in the following error when 4 or more GravityEntity instances have been loaded:
+     // Texture cache overflow: 16 texture units available.
+     //
+     // As such, the workaround is to just use tiles as the underlying sprite for this entity.
  });
  
  /**
