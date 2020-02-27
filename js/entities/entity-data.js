@@ -90,6 +90,7 @@ function playBGM() {
         case "level1": expectedBGM = "forest_theme"; break;
         case "level2": expectedBGM = "industrial_theme"; break;
         case "level3": expectedBGM = "space_theme"; break;
+        case "level_final": expectedBGM = "level_final_theme"; break;
         case "_startmenu": me.audio.stopTrack(); break;
         case "gameover": me.audio.stopTrack(); break;
     }
@@ -190,5 +191,30 @@ function getAllMessages() {
         ["Cows in space? I guess that's why they call our galaxy \"The Milky Way\"! Hah!", "Anyway, if you can make them fall asleep, you can pass by them without getting hurt."],
         ["This next part of the level looks like a real doozy. You'll have to time your jumps and movements just right to make it over those cow-faced scoundrels."],
         ["I'm going to be blunt with you, Merio - this guy is BIG. Bigger than those Poppin Fresh guys from the first game, I'm pretty sure. And it looks like it's willing to do everything in its power to stop you from finding happiness.", "But don't let its speed or size fool you. It appears to tire itself out every now and then, but tends to wake up randomly so you'll need to pick a good opportunity to run past it..."],
+
+        ["GOOD DAY TO YOU, MERIO.",
+         "Merio: Good day to me too.",
+         "YOU HAVE COME TO SEEK ANSWERS TO YET ANOTHER ONE OF LIFE'S MANY QUESTIONS?",
+         "Merio: Yeah, although now that I think about it, I could have just looked for answers on the Internet...",
+         "WELL, SINCE YOU'RE HERE NOW, I MAY AS WELL TRY TO ANSWER YOUR QUESTION.",
+         "Merio: Okay - How do I find happiness?",
+         "AH, A FINE QUESTION INDEED. HAPPINESS IS FOUND IN ONE OF THE MOST UNEXPECTED WAYS.",
+         "MANY PEOPLE HAVE SPENT YEARS TRYING TO FIND HAPPINESS, ONLY TO REGRET THEIR EFFORTS.",
+         "ARE YOU PREPARED TO HAVE YOUR MIND BLOWN BY MY EPIC RESPONSE?",
+         "BECAUSE WHAT I AM ABOUT TO TELL YOU CANNOT BE UNTOLD.",
+         "Merio: Yep, sounds good to me.",
+         "VERY WELL THEN.",
+         "HAPPINESS IS FOUND BY KNOWING YOU HAVE COMPLETED THIS GAME.",
+         "THERE, THE SECRET OF THE AGES HAS BEEN REVEALED TO YOU.",
+         "I CAN SENSE YOU ARE NOW SLIGHTLY HAPPIER THAN USUAL.",
+         "Merio: Well, I was kind of expecting to find more happiness...",
+         "CORRECTIMUNDO, BUT YOU STILL FOUND SOME HAPPINESS NONETHELESS?",
+         "Merio: ...",
+         "...",
+         "Merio: ...I suppose so.",
+         "GOOD! MY JOB HERE IS DONE.",
+         "Merio: Now that I've finished my adventure, what now?",
+         "YOU COULD TRY AND ACHIEVE SOME OF YOUR OTHER LIFE GOALS?",
+         "Merio: Life has MORE goals?! That implies there's yet another sequel in the works..."],
     ];
 }
