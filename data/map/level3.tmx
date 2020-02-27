@@ -72,7 +72,7 @@
     <property name="frameheight" type="int" value="128"/>
     <property name="framewidth" type="int" value="128"/>
     <property name="image" value="PORTAL"/>
-    <property name="to" value="level2"/>
+    <property name="to" value="level_final"/>
    </properties>
   </object>
  </objectgroup>
