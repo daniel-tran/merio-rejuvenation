@@ -23,7 +23,8 @@
    <properties>
     <property name="label" value="Controls"/>
     <property name="message">Use the ARROW keys to move around.
-Press UP to jump, when you're not surrounded by trampolines.</property>
+Press UP to jump, when you're not surrounded by trampolines.
+Both the &gt;&gt; button and SPACEBAR can be used to read message prompts.</property>
    </properties>
   </object>
   <object id="43" name="MessageButtonEntity" x="96" y="128" width="32" height="32">
