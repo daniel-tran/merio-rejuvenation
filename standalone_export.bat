@@ -22,6 +22,12 @@ if not exist %rcedit% (
 echo Changing the game icon...
 call %rcedit% bin\%defaultgamename% --set-icon favicon.ico
 
+echo Setting various miscellaneous properties...
+call %rcedit% bin\%defaultgamename% --set-version-string "FileDescription" "A hil-hair-ious adventure with your good pal, Merio"
+call %rcedit% bin\%defaultgamename% --set-version-string "ProductName" "MERIO Rejuvenation"
+call %rcedit% bin\%defaultgamename% --set-version-string "OriginalFilename" "MERIO Rejuvenation.exe"
+call %rcedit% bin\%defaultgamename% --set-version-string "LegalCopyright" "Remember kids, stealing is bad."
+
 :: Change the executable name after packaging, as it is not known where the default name is set
 echo Changing the game name...
 ren bin\%defaultgamename% "MERIO Rejuvenation.exe"
