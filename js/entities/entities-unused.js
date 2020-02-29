@@ -19,8 +19,6 @@
          return false;
      },
      update: function(dt) {
-         let opacity = this.getOpacity();
-         
          if (game.data.flashBlockTimer < game.data.flashBlockTimerMax) {
              game.data.flashBlockTimer++;
              // Opacity increases while the timer is active

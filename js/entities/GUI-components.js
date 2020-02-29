@@ -36,7 +36,7 @@ game.MessageButtonEntity = me.GUI_Object.extend({
         
         // If there is no label, save rendering resources by not adding an extra object to the world, which would be invisible anyway
         if (this.settings.label.length > 0) {
-            let label = new game.BasicTextEntity(x + ( settings.framewidth * 1.5 ), y - ( settings.frameheight * 0.1 ), this.settings.label, settings);
+            var label = new game.BasicTextEntity(x + ( settings.framewidth * 1.5 ), y - ( settings.frameheight * 0.1 ), this.settings.label, settings);
             // Use second parameter to control Z axis priority. Most entities including tiles will have a value < 1
             me.game.world.addChild(label, 1);
         }

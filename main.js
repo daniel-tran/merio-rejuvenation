@@ -18,6 +18,9 @@ app.on('window-all-closed', () => {
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({ width: 960, height: 660 });
+  
+  // Set the application icon when run, which is not guaranteed to be the same as the desktop icon
+  mainWindow.setIcon(path.join(__dirname, 'favicon.ico'));
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({

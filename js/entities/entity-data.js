@@ -81,9 +81,9 @@ function detectMerio(entityName) {
 
 // Used to play the background music for various levels without needing to change game states
 function playBGM() {
-    let currentLevel = me.levelDirector.getCurrentLevel().name;
-    let currentBGM = me.audio.getCurrentTrack();
-    let expectedBGM = currentBGM;
+    var currentLevel = me.levelDirector.getCurrentLevel().name;
+    var currentBGM = me.audio.getCurrentTrack();
+    var expectedBGM = currentBGM;
 
     // Play an overworld theme song
     switch (currentLevel) {
@@ -104,7 +104,7 @@ function playBGM() {
 
 // Shows/Hides the message modal from index.html and sets its main body of text
 function toggleMessage(message, isShown) {
-    let textStatus = ["none", "block"];
+    var textStatus = ["none", "block"];
     // Since true = 1 and false = 0, it can be multiplied with 1 to get an integer index
     document.getElementById("messageModal").style.display = textStatus[1 * isShown];
     document.getElementById("messageContents").innerText = message;
@@ -156,7 +156,7 @@ function resetScoreAndLives() {
 // An external interface to call BoxGuyEntity.nextMessage() from entities.js
 function manualMessageUpdate() {
     // Note: me.game.world.getChildByName() is computationally expensive, so try not to do this all the time.
-    let boxguys = me.game.world.getChildByName("BoxGuyEntity");
+    var boxguys = me.game.world.getChildByName("BoxGuyEntity");
 
     // When no box guys are on the level, just treat the message as a one-message interaction
     if (boxguys.length === 0) {
@@ -164,7 +164,7 @@ function manualMessageUpdate() {
         toggleResume(true, "");
     }
 
-    for (let i = 0; i < boxguys.length; i++){
+    for (var i = 0; i < boxguys.length; i++){
         // The one major issue with doing an external function call this way is that there's no good way of
         // determining which specific instance of an entity is being interacted with.
         // The naive implementation is to just assume that only one instance is being interacted at any one

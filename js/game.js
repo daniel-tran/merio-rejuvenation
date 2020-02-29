@@ -37,7 +37,7 @@ var game = {
     // Run on game resources loaded.
     "loaded" : function () {
         // Set up the necessary states to get the flash animation playing when restarting the level
-        let screen = new game.PlayScreen();
+        var screen = new game.PlayScreen();
         me.state.FLASH_ANIMATION = me.state.USER + 1;
         me.state.set(me.state.PLAY, screen);
         me.state.set(me.state.FLASH_ANIMATION, screen);

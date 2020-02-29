@@ -197,7 +197,7 @@ game.PlayerEntity = me.Entity.extend({
                         // Since true = 1 and false = 0, Merio's X axis motion can be toggled
                         // based on the current X velocity of the platform itself.
                         // As such, the direction can be 1 - 0 (right) or 0 - 1 (left).
-                        let direction = ((response.b.body.vel.x > 0) - (response.b.body.vel.x < 0));
+                        var direction = ((response.b.body.vel.x > 0) - (response.b.body.vel.x < 0));
                         this.body.force.x = response.b.body.maxVel.x * direction;
                         // Use the idling animation when not moving around on the platform
                         if (!this.renderable.isCurrentAnimation("walk")) {
@@ -292,7 +292,7 @@ game.PlayerEntity = me.Entity.extend({
  game.EnemyEntity = me.Sprite.extend({
      init: function(x, y, settings) {
          // Get the area size that was defined in the tilemap
-         let width = settings.width;
+         var width = settings.width;
          
          // Define the sprite here instead of in the tilemap
          settings.image = "MONSTOID";
@@ -376,7 +376,7 @@ game.PlayerEntity = me.Entity.extend({
  game.MonstoidEntity = me.Sprite.extend({
      init: function(x, y, settings) {
          // Get the area size that was defined in the tilemap
-         let width = settings.width;
+         var width = settings.width;
          
          // Define the sprite here instead of in the tilemap
          settings.image = "MONSTOID";
@@ -431,7 +431,7 @@ game.PlayerEntity = me.Entity.extend({
  game.DustGuyEntity = me.Sprite.extend({
      init: function(x, y, settings) {
          // Get the area size that was defined in the tilemap
-         let height = settings.height;
+         var height = settings.height;
          
          // Define the sprite here instead of in the tilemap
          settings.image = "DUSTGUY";
@@ -821,7 +821,7 @@ game.PlayerEntity = me.Entity.extend({
  game.MovingPlatformXEntity = me.Sprite.extend({
      init: function(x, y, settings) {
          // Get the area size that was defined in the tilemap
-         let width = settings.width;
+         var width = settings.width;
          
          // Define the sprite here instead of in the tilemap
          settings.image = "MOVINGPLATFORM";
@@ -885,7 +885,7 @@ game.PlayerEntity = me.Entity.extend({
  game.MovingPlatformYEntity = me.Sprite.extend({
      init: function(x, y, settings) {
          // Get the area size that was defined in the tilemap
-         let height = settings.height;
+         var height = settings.height;
          
          // Define the sprite here instead of in the tilemap
          settings.image = "MOVINGPLATFORM";
