@@ -4,7 +4,6 @@
 
 game.HUD = game.HUD || {};
 
-
 game.HUD.Container = me.Container.extend({
 
     init: function() {
@@ -24,7 +23,6 @@ game.HUD.Container = me.Container.extend({
         this.addChild(new game.HUD.ScoreItem(5, 5));
     }
 });
-
 
 /**
  * a basic HUD item to display score

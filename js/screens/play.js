@@ -8,7 +8,7 @@ game.PlayScreen = me.Stage.extend({
         // based on which tile set this callback is called in.
         var currentLevel = me.levelDirector.getCurrentLevel().name;
         me.levelDirector.loadLevel(currentLevel);
-        
+
         // reset the score and life count when starting a new game
         if (game.data.lives <= 0) {
             resetScoreAndLives();

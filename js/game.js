@@ -16,7 +16,6 @@ var game = {
         flashBlockTimerMax : 500,
     },
 
-
     // Run on page load.
     "onload" : function () {
         // Initialize the video. See https://melonjs.github.io/melonJS/docs/me.video.html#.init

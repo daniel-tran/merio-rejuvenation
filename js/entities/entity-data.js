@@ -146,7 +146,6 @@ function isGameLevel() {
     return me.levelDirector.getCurrentLevel().name.startsWith("level");
 }
 
-
 // Uses existing properties in game.data to create a fresh game (properties found in game.js)
 function resetScoreAndLives() {
     game.data.lives = game.data.initialLives;
