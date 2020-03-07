@@ -32,7 +32,7 @@
  </objectgroup>
  <objectgroup id="8" name="GravityZone"/>
  <objectgroup id="5" name="Enemy">
-  <object id="27" name="MonstoidEntity" x="896" y="448" width="480" height="48"/>
+  <object id="27" name="MonstoidEntity" x="928" y="352" width="480" height="48"/>
   <object id="48" name="DustGuyEntity" x="1984" y="0" width="48" height="512"/>
   <object id="67" name="DustGuyEntity" x="2176" y="0" width="48" height="512"/>
   <object id="68" name="DustGuyEntity" x="2368" y="0" width="48" height="512"/>
@@ -70,10 +70,10 @@
   <object id="18" x="0" y="512" width="5280" height="32"/>
   <object id="22" x="2176" y="256" width="480" height="32"/>
   <object id="23" x="1248" y="288" width="64" height="32"/>
-  <object id="24" x="1888" y="-96" width="768" height="128"/>
-  <object id="25" x="1792" y="128" width="864" height="32"/>
+  <object id="24" x="1888" y="-96" width="736" height="128"/>
+  <object id="25" x="1792" y="128" width="832" height="32"/>
   <object id="29" x="672" y="320" width="64" height="64"/>
-  <object id="36" x="2624" y="32" width="32" height="96"/>
+  <object id="36" x="2624" y="-96" width="32" height="256"/>
   <object id="49" name="BoxGuyEntity" x="6080" y="352" width="38" height="38">
    <properties>
     <property name="messageIndex" type="int" value="2"/>
