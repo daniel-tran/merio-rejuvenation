@@ -33,6 +33,10 @@ call %rcedit% bin\%defaultgamename% --set-version-string "CompanyName" "Team Ple
 echo Changing the game name...
 ren bin\%defaultgamename% "MERIO Rejuvenation.exe"
 
+echo Preserving license info from Electron...
+mkdir bin\electron_license
+move bin\LICENSE* bin\electron_license
+
 :: Remove rcedit.exe, although it is helpful to have around when doing incremental packaging
 :: del rcedit-x64.exe
 
