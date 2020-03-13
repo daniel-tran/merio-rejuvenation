@@ -1,4 +1,4 @@
-:: Runs this script to package the game for standlone distribution
+:: Runs this script to package the game for standalone distribution
 
 @echo off
 
