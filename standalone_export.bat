@@ -1,4 +1,4 @@
-:: Mainly used to call 
+:: Runs this script to package the game for standlone distribution
 
 @echo off
 
