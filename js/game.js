@@ -20,6 +20,8 @@ var game = {
     "onload" : function () {
         // Initialize the video. See https://melonjs.github.io/melonJS/docs/me.video.html#.init
         // Use the fit scale method to scale the viewport in both dimensions when the browser window changes.
+        // A 4:3 aspect ratio is used, as a 16:9 ratio seems to create visual stutter during player movement.
+        // As a trade-off, there is screen padding if the browser window doesn't match the viewport ratio.
         if (!me.video.init(640, 480, {wrapper : "screen", scale : "auto", scaleMethod: "fit"})) {
             alert("Your browser does not support HTML5 canvas.");
             return;
