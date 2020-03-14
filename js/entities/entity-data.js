@@ -87,7 +87,7 @@ function playBGM() {
 
     // Play an overworld theme song
     switch (currentLevel) {
-        case "level1": expectedBGM = "forest_theme"; break;
+        case "level1": expectedBGM = "coast_theme"; break;
         case "level2": expectedBGM = "industrial_theme"; break;
         case "level3": expectedBGM = "space_theme"; break;
         case "level_final": expectedBGM = "level_final_theme"; break;
