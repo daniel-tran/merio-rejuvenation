@@ -30,3 +30,9 @@ Of course, melonJS has its own problems such as the debug panel not working out-
 "MERIO Rejuvenation" is built using the [melonJS boilerplate](https://github.com/melonjs/boilerplate), which is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php)
 
 Copyright (C) 2011 - 2017 Olivier Biot *(not sure if this is valid anymore, but is still preserved since it was included with the original melonJS boilerplate)*
+
+Music is sourced from "Super Smash Bros. Ultimate", "Starcraft", "Super Mario Galaxy" and "Kid Icarus Uprising".
+
+Special credit to ansimuz, TAD and LuminousDragonGames from [OpenGameArt.org](https://opengameart.org/) for their public domain art resources.
+
+Even after all these years, this one's for you, 'Big Raj' - who would have thought I'd still be making games about a hero whose gimmick is essentially a broken collision box?
