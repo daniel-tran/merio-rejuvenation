@@ -13,7 +13,7 @@
   </data>
  </layer>
  <imagelayer id="13" name="MEGA_MERIO" offsetx="320" offsety="160">
-  <image source="../img/backdrop/MEGA_MERIO.png" width="256" height="256"/>
+  <image source="../img/gui/MEGA_MERIO.png" width="256" height="256"/>
   <properties>
    <property name="repeat" value="no-repeat"/>
   </properties>

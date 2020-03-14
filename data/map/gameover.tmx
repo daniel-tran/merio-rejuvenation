@@ -7,7 +7,7 @@
   </data>
  </layer>
  <imagelayer id="12" name="Trashcan" offsetx="160" offsety="64">
-  <image source="../img/backdrop/TRASHCAN.png" width="512" height="512"/>
+  <image source="../img/gui/TRASHCAN.png" width="512" height="512"/>
  </imagelayer>
  <objectgroup id="2" name="Player"/>
  <objectgroup id="4" name="Button">
