@@ -66,6 +66,7 @@ var game = {
         // Register experimental entities, even though they aren't included in the main game
         me.pool.register("FlashBlockTriggerEntity", game.FlashBlockTriggerEntity);
         me.pool.register("FlashBlockEntity", game.FlashBlockEntity);
+        me.pool.register("DonutEntity", game.DonutEntity);
 
         // Register all custom GUI entities
         me.pool.register("MessageButtonEntity", game.MessageButtonEntity);
