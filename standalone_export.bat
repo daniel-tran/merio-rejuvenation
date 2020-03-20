@@ -28,6 +28,8 @@ call %rcedit% bin\%defaultgamename% --set-version-string "ProductName" "MERIO Re
 call %rcedit% bin\%defaultgamename% --set-version-string "OriginalFilename" "MERIO Rejuvenation.exe"
 call %rcedit% bin\%defaultgamename% --set-version-string "LegalCopyright" "Remember kids, stealing is bad."
 call %rcedit% bin\%defaultgamename% --set-version-string "CompanyName" "Team Plectrum"
+call %rcedit% bin\%defaultgamename% --set-file-version "1.0.0.0"
+call %rcedit% bin\%defaultgamename% --set-product-version "1.0.0"
 
 :: Change the executable name after packaging, as it is not known where the default name is set
 echo Changing the game name...
