@@ -1,4 +1,4 @@
-# MERIO Rejuvenation
+![MERIO Rejuvenation](https://github.com/daniel-tran/merio-rejuvenation/raw/master/data/img/gui/LOGO.png)
 
 The long-awaited sequel to [MERIO Reborn](https://github.com/daniel-tran/merio-reborn). Made from the ground-up using melonJS 7.1.1.
 
